@@ -2,5 +2,6 @@
   "library": "restsharp",
   "targetFramework": "net8.0",
   "sourceFolder": "/",
-  "packageName": "Whoop.Sdk"
+  "packageName": "Whoop.Sdk",
+  "nullableReferenceTypes": true
 }

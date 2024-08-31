@@ -448,6 +448,7 @@ components:
           example: '2022-04-24T02:25:44.774Z'
         end:
           type: string
+          nullable: true
           description: End time bound of the cycle. If not present, the user is currently in this cycle
           format: date-time
           example: '2022-04-24T10:25:44.774Z'
