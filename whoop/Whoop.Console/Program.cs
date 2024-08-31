@@ -23,7 +23,7 @@ appBuilder.Services.AddSingleton<ICycleApi>(
         {
             OAuthClientId = clientId,
             OAuthClientSecret = clientSecret,
-            AccessToken = "bzaPNH2WvjygCaouKyzBeC1-KNlil8WTQ3PnC3hZ5P0.ci0ipl6weeBRhZP0KQDIQrns9yuMWsK_xm3cSBZO3iI"
+            AccessToken = "QTbXHioxaFJTXAWqYOzq2tCBlcewLStaXssIviWrXKk.eJ-i79NRm7zfmUECcHGJcDky74t9GOx_pEQF16juX4E"
         });
     }); 
 

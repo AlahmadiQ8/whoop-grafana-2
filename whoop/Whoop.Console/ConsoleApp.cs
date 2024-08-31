@@ -10,15 +10,21 @@ public class ConsoleApp(IConfiguration configuration, ILogger<ConsoleApp> logger
 
     public async Task Run(string[] args)
     {
-        System.Console.WriteLine("Hello World!");
-        System.Console.WriteLine(configuration.GetValue<string>("WhoopApp:ClientSecret"));
-        
-        var res = await cycleApi.GetCycleCollectionAsync(
-            limit: 10);
-        
-        foreach (var resRecord in res.Records)
+        var fetchLimit = configuration.GetValue<int>("RecordsFetchLimit");
+
+        var totalCount = 0;
+        string? nextToken = null;
+        do
         {
-            System.Console.WriteLine(resRecord);
-        }
+            
+            var res = await cycleApi.GetCycleCollectionAsync(
+                limit: fetchLimit,
+                nextToken: nextToken);
+            nextToken = res.NextToken;
+            totalCount += res.Records.Count;
+
+            System.Console.WriteLine($"Total fetched so far: {totalCount} records");
+            // ReSharper disable once ConditionIsAlwaysTrueOrFalseAccordingToNullableAPIContract
+        } while(nextToken != null);
     }
 }

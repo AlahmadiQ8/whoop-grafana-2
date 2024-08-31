@@ -22,6 +22,7 @@
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/20e56c9338d8b67837bc73facea788ea7ae5dc62bd186fb0ebda1e73df8f7/HostApplicationBuilderSettings.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/4abf89622442576aafbeae4864a29875c31387912bde37dbe75af786118bb45/HostApplicationBuilder.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/5890bea1acfbf3fed68846cf88de417726aefd9611192c0103fe2da89fa41/ConfigurationBinder.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/67cc3911dd203a288c1fa955bec74e281d938be3b988330c2aac7c6ce63340/DataMemberAttribute.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/866641eb1561663e1e3cf301a8978b9bad8a050bbb6616220a38a9d3df447/HostingAbstractionsHostExtensions.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/d38692abc32c60d538385b7fb5c5a2df83c15d4754f6956a64ce1b8369fce8f/Host.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/open-api-generator/config.json" root0="FORCE_HIGHLIGHTING" />
@@ -62,23 +63,4 @@
   </component>
   <component name="UnityCheckinConfiguration" checkUnsavedScenes="false" />
   <component name="UnityProjectConfiguration" hasMinimizedUI="false" />
-  <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="DotNet Breakpoints">
-          <url>file://$PROJECT_DIR$/Whoop.Console/ConsoleApp.cs</url>
-          <line>15</line>
-          <properties documentPath="C:\Users\Asus\Dev\whoop-grafana\whoop\Whoop.Console\ConsoleApp.cs" containingFunctionPresentation="Method 'Run'">
-            <startOffsets>
-              <option value="460" />
-            </startOffsets>
-            <endOffsets>
-              <option value="533" />
-            </endOffsets>
-          </properties>
-          <option name="timeStamp" value="2" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
-  </component>
 </project>
