@@ -54,7 +54,7 @@ namespace Whoop.Sdk.Model
         /// </summary>
         /// <value>A token that can be used on the next request to access the next page of records. If the token is not present, there are no more records in the collection.</value>
         /// <example>MTIzOjEyMzEyMw</example>
-        [DataMember(Name = "next_token", EmitDefaultValue = false)]
+        [DataMember(Name = "next_token", EmitDefaultValue = true)]
         public string NextToken { get; set; }
 
         /// <summary>

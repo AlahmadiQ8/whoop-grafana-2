@@ -512,6 +512,7 @@ components:
             $ref: '#/components/schemas/Cycle'
         next_token:
           type: string
+          nullable: true
           description: A token that can be used on the next request to access the next page of records. If the token is not present, there are no more records in the collection.
           example: MTIzOjEyMzEyMw
     PaginatedRecoveryResponse:
@@ -524,6 +525,7 @@ components:
             $ref: '#/components/schemas/Recovery'
         next_token:
           type: string
+          nullable: true
           description: A token that can be used on the next request to access the next page of records. If the token is not present, there are no more records in the collection.
           example: MTIzOjEyMzEyMw
     Recovery:
@@ -812,6 +814,7 @@ components:
             $ref: '#/components/schemas/Sleep'
         next_token:
           type: string
+          nullable: true
           description: A token that can be used on the next request to access the next page of records. If the token is not present, there are no more records in the collection.
           example: MTIzOjEyMzEyMw
     UserBodyMeasurement:
@@ -1033,6 +1036,7 @@ components:
             $ref: '#/components/schemas/Workout'
         next_token:
           type: string
+          nullable: true
           description: A token that can be used on the next request to access the next page of records. If the token is not present, there are no more records in the collection.
           example: MTIzOjEyMzEyMw
   securitySchemes:
