@@ -7,14 +7,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="e52df4b9-a088-4a57-ad69-a8d9c3bd7c15" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/Whoop.Console/ServiceRegristrations/CosmosDbRegistration.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Whoop.Console/ServiceRegristrations/WhoopClientRegistrations.cs" afterDir="false" />
+    <list default="true" id="e52df4b9-a088-4a57-ad69-a8d9c3bd7c15" name="Changes" comment="added user profile">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.whoop/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.whoop/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Whoop.Console/ConsoleApp.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Whoop.Console/ConsoleApp.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Whoop.Console/Models.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Whoop.Console/Models.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Whoop.Console/Program.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Whoop.Console/Program.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Whoop.Console/appsettings.json" beforeDir="false" afterPath="$PROJECT_DIR$/Whoop.Console/appsettings.json" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -46,7 +42,10 @@
 }</component>
   <component name="HighlightingSettingsPerFile">
     <setting file="mock:///Users/mohammadmohammad/Dev/whoop-grafana/whoop/Whoop.Console/ConsoleApp.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///Users/mohammadmohammad/Dev/whoop-grafana/whoop/Whoop.Console/ConsoleApp.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="mock:///Users/mohammadmohammad/Dev/whoop-grafana/whoop/Whoop.Console/Models.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///Users/mohammadmohammad/Dev/whoop-grafana/whoop/Whoop.Console/Models.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///Users/mohammadmohammad/Dev/whoop-grafana/whoop/Whoop.Console/Program.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="mock:///Users/mohammadmohammad/Dev/whoop-grafana/whoop/Whoop.Console/appsettings.json" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/open-api-generator/config.json" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/e2737df420f949d6825b9a92af35542f2ce00/49/39379218/RestClientOptions.cs" root0="FORCE_HIGHLIGHTING" />
@@ -111,8 +110,17 @@
       <workItem from="1725634569537" duration="594000" />
       <workItem from="1725635192434" duration="7426000" />
       <workItem from="1725648181905" duration="1971000" />
-      <workItem from="1725650984559" duration="606000" />
+      <workItem from="1725650984559" duration="884000" />
     </task>
+    <task id="LOCAL-00001" summary="added user profile">
+      <option name="closed" value="true" />
+      <created>1725651665353</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1725651665353</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -134,6 +142,8 @@
   <component name="VcsManagerConfiguration">
     <option name="LOCAL_CHANGES_DETAILS_PREVIEW_SHOWN" value="false" />
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="true" />
+    <MESSAGE value="added user profile" />
+    <option name="LAST_COMMIT_MESSAGE" value="added user profile" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

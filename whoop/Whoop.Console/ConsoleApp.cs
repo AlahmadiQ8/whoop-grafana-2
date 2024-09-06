@@ -32,14 +32,12 @@ public class ConsoleApp(
         
         do
         {
-            
             var res = await cycleApi.GetCycleCollectionAsync(
                 limit: fetchLimit,
                 start: lastInsertedCycleStartTimeMinus1,
                 nextToken: nextToken);
             nextToken = res.NextToken;
             totalCount += res.Records.Count;
-
             logger.LogInformation("Total fetched so far: {totalCount} records", totalCount);
 
             await BulkUpsertAsync(res.Records.Select(r => r.ToCycleDto(userProfile)));
@@ -62,6 +60,7 @@ public class ConsoleApp(
     private async Task<CycleDto?> GetLastInsertedCycleAsync()
     {
         var linqFeed  = container.GetItemLinqQueryable<CycleDto>()
+            .Where(c => c.type == Type.Cycle)
             .OrderByDescending(c => c.Start)
             .ToFeedIterator();
 

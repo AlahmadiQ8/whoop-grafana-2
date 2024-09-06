@@ -55,7 +55,7 @@ static class CycleExtensions
         );
     }
 
-    public static CycleScoreDto ToCycleScoreDto(this CycleScore cycleScore)
+    private static CycleScoreDto ToCycleScoreDto(this CycleScore cycleScore)
     {
         return new CycleScoreDto(
             Strain: cycleScore.Strain,
