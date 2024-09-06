@@ -1,11 +1,14 @@
 // ReSharper disable InconsistentNaming
 
+using System.Diagnostics.CodeAnalysis;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 using Whoop.Sdk.Model;
+// ReSharper disable NotAccessedPositionalProperty.Global
 
 namespace Whoop.Console;
 
+[SuppressMessage("ReSharper", "UnusedMember.Global")]
 public record CycleDto(
     string Id,
     string UserId,
@@ -15,7 +18,10 @@ public record CycleDto(
     DateTime? End,
     string TimeZoneOffset,
     Cycle.ScoreStateEnum ScoreState,
-    CycleScoreDto? Score)
+    CycleScoreDto? Score,
+    string email,
+    string firstName,
+    string lastName)
 {
     public Type type { get; init; } = Type.Cycle;
 }
@@ -30,7 +36,7 @@ public enum Type
 
 static class CycleExtensions
 {
-    public static CycleDto ToCycleDto(this Cycle cycle)
+    public static CycleDto ToCycleDto(this Cycle cycle, UserBasicProfile userBasicProfile)
     {
         return new CycleDto(
             Id: cycle.Id.ToString(),
@@ -42,7 +48,10 @@ static class CycleExtensions
             TimeZoneOffset: cycle.TimezoneOffset,
             ScoreState: cycle.ScoreState,
             // ReSharper disable once ConditionalAccessQualifierIsNonNullableAccordingToAPIContract
-            Score: cycle.Score?.ToCycleScoreDto()
+            Score: cycle.Score?.ToCycleScoreDto(),
+            email: userBasicProfile.Email,
+            firstName: userBasicProfile.FirstName,
+            lastName: userBasicProfile.LastName
         );
     }
 

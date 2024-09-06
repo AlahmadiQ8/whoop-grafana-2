@@ -10,6 +10,7 @@ public class ConsoleApp(
     IConfiguration configuration, 
     ILogger<ConsoleApp> logger, 
     ICycleApi cycleApi,
+    IUserApi userApi,
     Container container)
 {
 
@@ -26,6 +27,8 @@ public class ConsoleApp(
             logger.LogInformation("Last inserted cycle was at {start}", lastInsertedCycleStartTimeMinus1);
         else
             logger.LogInformation("No items found");
+
+        var userProfile = await userApi.GetProfileBasicAsync();
         
         do
         {
@@ -39,7 +42,7 @@ public class ConsoleApp(
 
             logger.LogInformation("Total fetched so far: {totalCount} records", totalCount);
 
-            await BulkUpsertAsync(res.Records.Select(r => r.ToCycleDto()));
+            await BulkUpsertAsync(res.Records.Select(r => r.ToCycleDto(userProfile)));
             logger.LogInformation("Upserted so far: {totalCount} records", totalCount);
 
             // ReSharper disable once ConditionIsAlwaysTrueOrFalseAccordingToNullableAPIContract
