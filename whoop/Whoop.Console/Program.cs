@@ -1,7 +1,9 @@
-﻿using Microsoft.Extensions.Configuration;
+﻿using Azure.Identity;
+using Microsoft.Azure.Cosmos;
+using Microsoft.Azure.Cosmos.Fluent;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
 using Whoop.Console;
 using Whoop.Sdk.Api;
 using Whoop.Sdk.Client;
@@ -10,6 +12,16 @@ var appBuilder = Host.CreateApplicationBuilder(args);
 appBuilder.Configuration.AddJsonFile("appsettings.local.json");
 
 appBuilder.Services.AddSingleton<ConsoleApp>();
+
+Container container = new CosmosClientBuilder("https://whoop.documents.azure.com:443", new DefaultAzureCredential())
+    .WithSerializerOptions(new CosmosSerializationOptions { PropertyNamingPolicy = CosmosPropertyNamingPolicy.CamelCase })
+    .WithBulkExecution(true)
+    .Build()
+    .GetDatabase("whoop")
+    .GetContainer("whoop-data");
+
+appBuilder.Services.AddSingleton(container);
+
 appBuilder.Services.AddSingleton<ICycleApi>(
     implementationFactory: static sp =>
     {
@@ -23,7 +35,7 @@ appBuilder.Services.AddSingleton<ICycleApi>(
         {
             OAuthClientId = clientId,
             OAuthClientSecret = clientSecret,
-            AccessToken = "QTbXHioxaFJTXAWqYOzq2tCBlcewLStaXssIviWrXKk.eJ-i79NRm7zfmUECcHGJcDky74t9GOx_pEQF16juX4E"
+            AccessToken = "dPRkzEfUwZG6BnwyZAK4VZHTtuwc-r1aUaSWtpO660U.sFSeyJCOujHPba_kUHwDTRC-fCFshDIkl0dtDs2IVJI"
         });
     }); 
 

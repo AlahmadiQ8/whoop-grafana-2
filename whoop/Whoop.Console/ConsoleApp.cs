@@ -1,11 +1,16 @@
-﻿using Microsoft.Extensions.Configuration;
+﻿using Microsoft.Azure.Cosmos;
+using Microsoft.Azure.Cosmos.Linq;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 using Whoop.Sdk.Api;
-using Whoop.Sdk.Client;
 
 namespace Whoop.Console;
 
-public class ConsoleApp(IConfiguration configuration, ILogger<ConsoleApp> logger, ICycleApi cycleApi)
+public class ConsoleApp(
+    IConfiguration configuration, 
+    ILogger<ConsoleApp> logger, 
+    ICycleApi cycleApi,
+    Container container)
 {
 
     public async Task Run(string[] args)
@@ -14,17 +19,51 @@ public class ConsoleApp(IConfiguration configuration, ILogger<ConsoleApp> logger
 
         var totalCount = 0;
         string? nextToken = null;
+
+        var lastInsertedCycleStartTimeMinus1 = (await GetLastInsertedCycleAsync())?.Start.Subtract(TimeSpan.FromDays(1));
+        
+        if (lastInsertedCycleStartTimeMinus1 != null)
+            logger.LogInformation("Last inserted cycle was at {start}", lastInsertedCycleStartTimeMinus1);
+        else
+            logger.LogInformation("No items found");
+        
         do
         {
             
             var res = await cycleApi.GetCycleCollectionAsync(
                 limit: fetchLimit,
+                start: lastInsertedCycleStartTimeMinus1,
                 nextToken: nextToken);
             nextToken = res.NextToken;
             totalCount += res.Records.Count;
 
-            System.Console.WriteLine($"Total fetched so far: {totalCount} records");
+            logger.LogInformation("Total fetched so far: {totalCount} records", totalCount);
+
+            await BulkUpsertAsync(res.Records.Select(r => r.ToCycleDto()));
+            logger.LogInformation("Upserted so far: {totalCount} records", totalCount);
+
             // ReSharper disable once ConditionIsAlwaysTrueOrFalseAccordingToNullableAPIContract
         } while(nextToken != null);
+    }
+
+    private async Task BulkUpsertAsync(IEnumerable<CycleDto> items)
+    {
+        var tasks = items
+            .Select(cycleDto => container.UpsertItemAsync(cycleDto, new PartitionKey(cycleDto.Id)))
+            .Cast<Task>()
+            .ToList();
+
+        await Task.WhenAll(tasks);
+    }
+
+    private async Task<CycleDto?> GetLastInsertedCycleAsync()
+    {
+        var linqFeed  = container.GetItemLinqQueryable<CycleDto>()
+            .OrderByDescending(c => c.Start)
+            .ToFeedIterator();
+
+        return !linqFeed.HasMoreResults 
+            ? null 
+            : (await linqFeed.ReadNextAsync()).FirstOrDefault();
     }
 }
