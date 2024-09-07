@@ -1,7 +1,10 @@
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Newtonsoft.Json;
+using RestSharp.Authenticators;
 using Whoop.Sdk.Api;
 using Whoop.Sdk.Client;
+using Whoop.Sdk.Client.Auth;
 
 namespace Whoop.Console.ServiceRegristrations;
 
@@ -11,6 +14,25 @@ public static class WhoopClientRegistrations
     {
         services.AddSingleton<ICycleApi>(implementationFactory: static sp => new CycleApi(sp.GetClientConfiguration()));
         services.AddSingleton<IUserApi>(implementationFactory: static sp => new UserApi(sp.GetClientConfiguration()));
+        
+        services.AddSingleton<ITokenRefresher>(
+            implementationFactory: static sp =>
+            {
+                var configuration = sp.GetRequiredService<IConfiguration>();
+                var client = new OAuthAuthenticator(
+                    refreshToken: "LusXbcWWBiCvBe4rdKsJ58n0Zg7T7K2rPU8h_2u2c_Q.unrASLmsL2GzLkFl4KExdHgD1rA1EwFxnxgV6XYKwqg",
+                    tokenUrl: configuration.GetValue<string>("WhoopApp:TokenUrl")!,
+                    clientId: configuration.GetValue<string>("WhoopApp:ClientId")!,
+                    clientSecret: configuration.GetValue<string>("WhoopApp:ClientSecret")!,
+                    scope: "offline",
+                    flow: OAuthFlow.REFRESH_TOKEN,
+                    serializerSettings: new JsonSerializerSettings(),
+                    configuration: new Configuration()
+                    );
+                
+
+                return client;
+            });
     }
 
     private static Configuration GetClientConfiguration(this IServiceProvider sp)
@@ -23,9 +45,7 @@ public static class WhoopClientRegistrations
 
         return new Configuration
         {
-            OAuthClientId = clientId,
-            OAuthClientSecret = clientSecret,
-            AccessToken = "mpNQ8CNirARM_hhORXK-D47EWBW2FNt-Piq93hO_xCA.MopCQ8nT1FEHrcMLfirsyart3LYK01MHtW2jg7jTq9k"
+            AccessToken = "PSq0gagKJnp_ngutsGlvlgLI2yKIJ6pdvs_RMcQIamc.QDJja7G2mhgm9DMvBcb3AlBUTXafUFEnJq1LdRegOtk"
         };
     }
 }

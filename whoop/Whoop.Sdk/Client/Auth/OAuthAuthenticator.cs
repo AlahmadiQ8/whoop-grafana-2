@@ -19,9 +19,10 @@ namespace Whoop.Sdk.Client.Auth
     /// <summary>
     /// An authenticator for OAuth2 authentication flows
     /// </summary>
-    public class OAuthAuthenticator : AuthenticatorBase
+    public class OAuthAuthenticator : AuthenticatorBase, ITokenRefresher
     {
         readonly string _tokenUrl;
+        readonly string? _refreshToken;
         readonly string _clientId;
         readonly string _clientSecret;
         readonly string? _scope;
@@ -39,14 +40,14 @@ namespace Whoop.Sdk.Client.Auth
             string? scope,
             OAuthFlow? flow,
             JsonSerializerSettings serializerSettings,
-            IReadableConfiguration configuration) : base("")
+            IReadableConfiguration configuration,
+            string? refreshToken = null) : base("")
         {
+            _refreshToken = refreshToken;
             _tokenUrl = tokenUrl;
             _clientId = clientId;
             _clientSecret = clientSecret;
             _scope = scope;
-            _serializerSettings = serializerSettings;
-            _configuration = configuration;
 
             switch (flow)
             {
@@ -61,6 +62,9 @@ namespace Whoop.Sdk.Client.Auth
                     break;*/
                 case OAuthFlow.APPLICATION:
                     _grantType = "client_credentials";
+                    break;
+                case OAuthFlow.REFRESH_TOKEN:
+                    _grantType = "refresh_token";
                     break;
                 default:
                     break;
@@ -82,7 +86,7 @@ namespace Whoop.Sdk.Client.Auth
         /// Gets the token from the OAuth2 server.
         /// </summary>
         /// <returns>An authentication token.</returns>
-        async Task<string> GetToken()
+        public async Task<string> GetToken()
         {
             var client = new RestClient(_tokenUrl,
                 configureSerialization: serializerConfig => serializerConfig.UseSerializer(() => new CustomJsonCodec(_serializerSettings, _configuration)));
@@ -90,7 +94,8 @@ namespace Whoop.Sdk.Client.Auth
             var request = new RestRequest()
                 .AddParameter("grant_type", _grantType)
                 .AddParameter("client_id", _clientId)
-                .AddParameter("client_secret", _clientSecret);
+                .AddParameter("client_secret", _clientSecret)
+                .AddParameter("refresh_token", _refreshToken);
 
             if (!string.IsNullOrEmpty(_scope))
             {
@@ -98,17 +103,8 @@ namespace Whoop.Sdk.Client.Auth
             }
 
             var response = await client.PostAsync<TokenResponse>(request).ConfigureAwait(false);
-            
-            // RFC6749 - token_type is case insensitive.
-            // RFC6750 - In Authorization header Bearer should be capitalized.
-            // Fix the capitalization irrespective of token_type casing.
-            switch (response.TokenType?.ToLower())
-            {
-                case "bearer":
-                    return $"Bearer {response.AccessToken}";
-                default:
-                    return $"{response.TokenType} {response.AccessToken}";
-            }
+
+            return response.AccessToken;
         }
     }
 }

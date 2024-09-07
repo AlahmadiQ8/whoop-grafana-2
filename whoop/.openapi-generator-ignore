@@ -29,3 +29,5 @@ api/**
 git_push.sh
 README.md
 docs
+Whoop.Sdk/Client/Auth/**
+

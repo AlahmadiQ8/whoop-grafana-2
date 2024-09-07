@@ -6,9 +6,6 @@ Whoop.Sdk/Api/WorkoutApi.cs
 Whoop.Sdk/Client/ApiClient.cs
 Whoop.Sdk/Client/ApiException.cs
 Whoop.Sdk/Client/ApiResponse.cs
-Whoop.Sdk/Client/Auth/OAuthAuthenticator.cs
-Whoop.Sdk/Client/Auth/OAuthFlow.cs
-Whoop.Sdk/Client/Auth/TokenResponse.cs
 Whoop.Sdk/Client/ClientUtils.cs
 Whoop.Sdk/Client/Configuration.cs
 Whoop.Sdk/Client/ExceptionFactory.cs

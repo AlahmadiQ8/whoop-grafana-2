@@ -3,6 +3,7 @@ using Microsoft.Azure.Cosmos.Linq;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 using Whoop.Sdk.Api;
+using Whoop.Sdk.Client.Auth;
 
 namespace Whoop.Console;
 
@@ -11,6 +12,7 @@ public class ConsoleApp(
     ILogger<ConsoleApp> logger, 
     ICycleApi cycleApi,
     IUserApi userApi,
+    ITokenRefresher tokenRefresher,
     Container container)
 {
 
@@ -45,6 +47,12 @@ public class ConsoleApp(
 
             // ReSharper disable once ConditionIsAlwaysTrueOrFalseAccordingToNullableAPIContract
         } while(nextToken != null);
+    }
+
+    public async Task Authenticate(string[] args)
+    {
+        var token = await tokenRefresher.GetToken();
+        System.Console.WriteLine($"Token: {token}");
     }
 
     private async Task BulkUpsertAsync(IEnumerable<CycleDto> items)

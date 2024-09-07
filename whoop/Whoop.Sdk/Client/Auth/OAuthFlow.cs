@@ -22,6 +22,8 @@ namespace Whoop.Sdk.Client.Auth
         /// <summary>Password flow</summary>
         PASSWORD,
         /// <summary>Client credentials flow</summary>
-        APPLICATION
+        APPLICATION,
+        /// <summary>Client credentials flow</summary>
+        REFRESH_TOKEN
     }
 }

@@ -1043,13 +1043,8 @@ components:
     OAuth:
       type: oauth2
       flows:
-        authorizationCode:
-          authorizationUrl: https://api.prod.whoop.com/oauth/oauth2/auth
+        clientCredentials :
           tokenUrl: https://api.prod.whoop.com/oauth/oauth2/token
+          refreshUrl: https://api.prod.whoop.com/oauth/oauth2/token
           scopes:
-            read:recovery: Read Recovery data, including score, heart rate variability, and resting heart rate.
-            read:cycles: Read cycles data, including day Strain and average heart rate during a physiological cycle.
-            read:workout: Read workout data, including activity Strain and average heart rate.
-            read:sleep: Read sleep data, including performance % and duration per sleep stage.
-            read:profile: Read profile data, including name and email.
-            read:body_measurement: Read body measurements data, including height, weight, and max heart rate.
+            offline: Access to refresh token

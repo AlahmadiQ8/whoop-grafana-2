@@ -14,4 +14,5 @@ using var app = appBuilder.Build();
 
 var consoleApp = app.Services.GetRequiredService<ConsoleApp>();
 
+// await consoleApp.Authenticate(args);
 await consoleApp.Run(args);
