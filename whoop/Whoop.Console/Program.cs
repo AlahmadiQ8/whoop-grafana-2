@@ -1,6 +1,7 @@
 ﻿using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Whoop.Commons.ServiceRegistrations;
 using Whoop.Console;
 using Whoop.Console.ServiceRegristrations;
 

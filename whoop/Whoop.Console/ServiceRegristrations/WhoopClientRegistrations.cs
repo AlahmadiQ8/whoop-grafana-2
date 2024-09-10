@@ -21,9 +21,9 @@ public static class WhoopClientRegistrations
                 var configuration = sp.GetRequiredService<IConfiguration>();
                 var client = new OAuthAuthenticator(
                     refreshToken: "LusXbcWWBiCvBe4rdKsJ58n0Zg7T7K2rPU8h_2u2c_Q.unrASLmsL2GzLkFl4KExdHgD1rA1EwFxnxgV6XYKwqg",
-                    tokenUrl: configuration.GetValue<string>("WhoopApp:TokenUrl")!,
-                    clientId: configuration.GetValue<string>("WhoopApp:ClientId")!,
-                    clientSecret: configuration.GetValue<string>("WhoopApp:ClientSecret")!,
+                    tokenUrl: "https://api.prod.whoop.com/oauth/oauth2/token",
+                    clientId: configuration.GetValue<string>("WhoopSettings:ClientId")!,
+                    clientSecret: configuration.GetValue<string>("WhoopSettings:ClientSecret")!,
                     scope: "offline",
                     flow: OAuthFlow.REFRESH_TOKEN,
                     serializerSettings: new JsonSerializerSettings(),
@@ -38,8 +38,8 @@ public static class WhoopClientRegistrations
     private static Configuration GetClientConfiguration(this IServiceProvider sp)
     {
         var configuration = sp.GetRequiredService<IConfiguration>();
-        var clientId = configuration.GetValue<string>("WhoopApp:ClientId"); 
-        var clientSecret = configuration.GetValue<string>("WhoopApp:ClientSecret");
+        var clientId = configuration.GetValue<string>("WhoopSettings:ClientId"); 
+        var clientSecret = configuration.GetValue<string>("WhoopSettings:ClientSecret");
         ArgumentNullException.ThrowIfNull(clientId);
         ArgumentNullException.ThrowIfNull(clientSecret);
 

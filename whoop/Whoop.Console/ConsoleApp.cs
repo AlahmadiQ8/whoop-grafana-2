@@ -2,8 +2,10 @@
 using Microsoft.Azure.Cosmos.Linq;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
+using Whoop.Commons;
 using Whoop.Sdk.Api;
 using Whoop.Sdk.Client.Auth;
+using Type = Whoop.Commons.Type;
 
 namespace Whoop.Console;
 
