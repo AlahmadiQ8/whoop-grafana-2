@@ -4,5 +4,5 @@ namespace Whoop.Sdk.Client.Auth;
 
 public interface ITokenRefresher
 {
-    Task<string> GetToken();
+    Task<TokenResponse> GetTokenAsync();
 }

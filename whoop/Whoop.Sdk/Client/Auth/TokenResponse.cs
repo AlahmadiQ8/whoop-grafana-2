@@ -12,7 +12,7 @@ using Newtonsoft.Json;
 
 namespace Whoop.Sdk.Client.Auth
 {
-    class TokenResponse
+    public class TokenResponse
     {
         [JsonProperty("token_type")]
         public string TokenType { get; set; }

@@ -4,6 +4,7 @@
         <AzureFunctionsVersion>v4</AzureFunctionsVersion>
     </PropertyGroup>
     <ItemGroup>
+        <PackageReference Include="Microsoft.Azure.WebJobs.Extensions.DurableTask" Version="2.13.5" />
         <PackageReference Include="Microsoft.NET.Sdk.Functions" Version="4.4.0"/>
         <PackageReference Include="Microsoft.Azure.Functions.Extensions" Version="1.1.0" />
         <PackageReference Include="Azure.Identity" Version="1.12.0" />
@@ -19,6 +20,7 @@
         </None>
     </ItemGroup>
     <ItemGroup>
+      <ProjectReference Include="..\Whoop.Commons\Whoop.Commons.csproj" />
       <ProjectReference Include="..\Whoop.Sdk\Whoop.Sdk.csproj" />
     </ItemGroup>
 </Project>

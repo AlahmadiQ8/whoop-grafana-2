@@ -78,15 +78,14 @@ namespace Whoop.Sdk.Client.Auth
         /// <returns>An authentication parameter.</returns>
         protected override async ValueTask<Parameter> GetAuthenticationParameter(string accessToken)
         {
-            var token = string.IsNullOrEmpty(Token) ? await GetToken().ConfigureAwait(false) : Token;
-            return new HeaderParameter(KnownHeaders.Authorization, token);
+            throw new NotSupportedException();
         }
 
         /// <summary>
         /// Gets the token from the OAuth2 server.
         /// </summary>
         /// <returns>An authentication token.</returns>
-        public async Task<string> GetToken()
+        public async Task<TokenResponse> GetTokenAsync()
         {
             var client = new RestClient(_tokenUrl,
                 configureSerialization: serializerConfig => serializerConfig.UseSerializer(() => new CustomJsonCodec(_serializerSettings, _configuration)));
@@ -104,7 +103,7 @@ namespace Whoop.Sdk.Client.Auth
 
             var response = await client.PostAsync<TokenResponse>(request).ConfigureAwait(false);
 
-            return response.AccessToken;
+            return response;
         }
     }
 }
