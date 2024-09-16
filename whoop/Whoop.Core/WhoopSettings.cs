@@ -1,4 +1,4 @@
-namespace Whoop.Commons;
+namespace Whoop.Core;
 
 public class WhoopSettings
 {

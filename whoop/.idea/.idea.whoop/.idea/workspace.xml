@@ -11,26 +11,23 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="e52df4b9-a088-4a57-ad69-a8d9c3bd7c15" name="Changes" comment="Step 5 - migrate to durable functions">
-      <change afterPath="$PROJECT_DIR$/Whoop.Commons/Mappers.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Whoop.Commons/Services/ProfileService.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Whoop.Commons/Services/WhoopServices.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Whoop.Functions/WhoopOrchestrator.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/../.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Whoop.Core/Services/CyclesService.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.whoop/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.whoop/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.run/Azure - Function App_ whoop .run.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Whoop.Commons/Models.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Whoop.Commons/Models.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Whoop.Commons/Services/CosmosDbOperations.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Whoop.Commons/Services/CosmosDbOperations.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Whoop.Commons/Whoop.Commons.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/Whoop.Commons/Whoop.Commons.csproj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Whoop.Commons/Mappers.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Whoop.Core/Mappers.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Whoop.Commons/Models.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Whoop.Core/Models.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Whoop.Commons/ServiceRegistrations/CosmosDbRegistration.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Whoop.Core/ServiceRegistrations/CosmosDbRegistration.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Whoop.Commons/Services/CosmosDbOperations.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Whoop.Core/Services/CosmosDbOperations.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Whoop.Commons/Services/ProfileService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Whoop.Core/Services/ProfileService.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Whoop.Commons/Services/WhoopServices.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Whoop.Core/Services/WhoopServices.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Whoop.Commons/Whoop.Commons.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/Whoop.Core/Whoop.Core.csproj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Whoop.Commons/WhoopSettings.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Whoop.Core/WhoopSettings.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Whoop.Console/ConsoleApp.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Whoop.Console/ConsoleApp.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Whoop.Console/Program.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Whoop.Console/Program.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Whoop.Console/ServiceRegristrations/WhoopClientRegistrations.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Whoop.Functions/MyTestFunction.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Whoop.Console/Whoop.Console.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/Whoop.Console/Whoop.Console.csproj" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Whoop.Functions/Startup.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Whoop.Functions/Startup.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Whoop.Functions/Whoop.Functions.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/Whoop.Functions/Whoop.Functions.csproj" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Whoop.Functions/WhoopSettings.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Whoop.Commons/WhoopSettings.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Whoop.Sdk/Client/Auth/ITokenRefresher.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Whoop.Sdk/Client/Auth/ITokenRefresher.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Whoop.Sdk/Client/Auth/OAuthAuthenticator.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Whoop.Sdk/Client/Auth/OAuthAuthenticator.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Whoop.Sdk/Client/Auth/TokenResponse.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Whoop.Sdk/Client/Auth/TokenResponse.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Whoop.Functions/WhoopOrchestrator.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Whoop.Functions/WhoopOrchestrator.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/whoop.sln" beforeDir="false" afterPath="$PROJECT_DIR$/whoop.sln" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -43,7 +40,7 @@
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$/.." value="main" />
+        <entry key="$PROJECT_DIR$/.." value="refactor" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
@@ -68,13 +65,17 @@
     <setting file="mock:///Users/mohammadmohammad/Dev/whoop-grafana/whoop/Whoop.Console/ConsoleApp.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="mock:///Users/mohammadmohammad/Dev/whoop-grafana/whoop/Whoop.Console/ConsoleApp.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="mock:///Users/mohammadmohammad/Dev/whoop-grafana/whoop/Whoop.Console/ConsoleApp.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///Users/mohammadmohammad/Dev/whoop-grafana/whoop/Whoop.Console/ConsoleApp.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="mock:///Users/mohammadmohammad/Dev/whoop-grafana/whoop/Whoop.Console/Models.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="mock:///Users/mohammadmohammad/Dev/whoop-grafana/whoop/Whoop.Console/Models.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="mock:///Users/mohammadmohammad/Dev/whoop-grafana/whoop/Whoop.Console/Models.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///Users/mohammadmohammad/Dev/whoop-grafana/whoop/Whoop.Console/Program.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="mock:///Users/mohammadmohammad/Dev/whoop-grafana/whoop/Whoop.Console/Program.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="mock:///Users/mohammadmohammad/Dev/whoop-grafana/whoop/Whoop.Console/Program.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="mock:///Users/mohammadmohammad/Dev/whoop-grafana/whoop/Whoop.Console/Program.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="mock:///Users/mohammadmohammad/Dev/whoop-grafana/whoop/Whoop.Console/appsettings.json" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Whoop.Core/Services/CyclesService.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="mock:///Users/mohammadmohammad/Dev/whoop-grafana/whoop/Whoop.Functions/Startup.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="mock:///Users/mohammadmohammad/Dev/whoop-grafana/whoop/Whoop.Functions/Startup.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="mock:///Users/mohammadmohammad/Dev/whoop-grafana/whoop/Whoop.Sdk/Client/Auth/ITokenRefresher.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="mock:///Users/mohammadmohammad/Dev/whoop-grafana/whoop/Whoop.Sdk/Client/Auth/ITokenRefresher.cs" root0="SKIP_HIGHLIGHTING" />
@@ -82,10 +83,12 @@
     <setting file="mock:///Users/mohammadmohammad/Dev/whoop-grafana/whoop/Whoop.Sdk/Client/Auth/OAuthAuthenticator.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="mock:///Users/mohammadmohammad/Dev/whoop-grafana/whoop/Whoop.Sdk/Client/Auth/TokenResponse.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/open-api-generator/config.json" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/3a4c11fa55a44e828524f4b4a3c5ebba9bc20/fb/ec082f1e/FunctionFailedException.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/676138d85f2c4c938f2e6e5de7e9f52afca0/c6/e8548df7/OptionsServiceCollectionExtensions.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/d7b784ffef6b43ccaed9eb04c8cb80f02aa420/dc/0e7003c5/Container.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/e2737df420f949d6825b9a92af35542f2ce00/49/39379218/RestClientOptions.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/5890bea1acfbf3fed68846cf88de417726aefd9611192c0103fe2da89fa41/ConfigurationBinder.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/e0e7f33a98190bd57fce2afa23cbd66d0de6f9b5dfb1ff64c7ca4f11b6b8f9/TaskFailedException.cs" root0="FORCE_HIGHLIGHTING" />
   </component>
   <component name="KubernetesApiPersistence">{}</component>
   <component name="KubernetesApiProvider">{
@@ -101,20 +104,20 @@
   <component name="ProjectViewState">
     <option name="autoscrollFromSource" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;.NET Project.Whoop.Console.executor&quot;: &quot;Run&quot;,
-    &quot;Azure - Function App.Azure - Function App: whoop .executor&quot;: &quot;Run&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;refactor&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    ".NET Project.Whoop.Console.executor": "Run",
+    "Azure - Function App.Azure - Function App: whoop .executor": "Run",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "git-widget-placeholder": "main",
+    "node.js.detected.package.eslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "settings.editor.selected.configurable": "com.microsoft.intellij.AzureConfigurable",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
+}]]></component>
   <component name="RunManager">
     <configuration name="Whoop.Console" type="DotNetProject" factoryName=".NET Project">
       <option name="EXE_PATH" value="$PROJECT_DIR$/Whoop.Console/bin/Debug/net8.0/Whoop.Console" />
@@ -221,7 +224,15 @@
       <option name="project" value="LOCAL" />
       <updated>1725994281365</updated>
     </task>
-    <option name="localTasksCounter" value="9" />
+    <task id="LOCAL-00009" summary="Step 5 - migrate to durable functions">
+      <option name="closed" value="true" />
+      <created>1726506726568</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1726506726568</updated>
+    </task>
+    <option name="localTasksCounter" value="10" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">

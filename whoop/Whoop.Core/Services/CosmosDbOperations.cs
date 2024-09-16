@@ -2,10 +2,8 @@ using Microsoft.Azure.Cosmos;
 using Microsoft.Azure.Cosmos.Linq;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
-using Whoop.Sdk.Api;
-using Whoop.Sdk.Client.Auth;
 
-namespace Whoop.Commons.Services;
+namespace Whoop.Core.Services;
 
 public class CosmosDbOperations(
     IConfiguration configuration, 

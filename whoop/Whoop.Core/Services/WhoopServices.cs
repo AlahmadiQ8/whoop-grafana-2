@@ -3,7 +3,7 @@ using Newtonsoft.Json;
 using Whoop.Sdk.Client;
 using Whoop.Sdk.Client.Auth;
 
-namespace Whoop.Commons.Services;
+namespace Whoop.Core.Services;
 
 public class WhoopServices(IOptions<WhoopSettings> options)
 {

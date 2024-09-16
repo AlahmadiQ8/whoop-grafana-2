@@ -1,6 +1,6 @@
 using Whoop.Sdk.Model;
 
-namespace Whoop.Commons;
+namespace Whoop.Core;
 
 public static class Mappers
 {

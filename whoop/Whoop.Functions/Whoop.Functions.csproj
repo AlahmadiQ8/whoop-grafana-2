@@ -20,7 +20,7 @@
         </None>
     </ItemGroup>
     <ItemGroup>
-      <ProjectReference Include="..\Whoop.Commons\Whoop.Commons.csproj" />
+      <ProjectReference Include="..\Whoop.Core\Whoop.Core.csproj" />
       <ProjectReference Include="..\Whoop.Sdk\Whoop.Sdk.csproj" />
     </ItemGroup>
 </Project>

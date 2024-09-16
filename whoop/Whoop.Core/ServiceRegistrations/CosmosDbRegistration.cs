@@ -3,7 +3,7 @@ using Microsoft.Azure.Cosmos;
 using Microsoft.Azure.Cosmos.Fluent;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace Whoop.Commons.ServiceRegistrations;
+namespace Whoop.Core.ServiceRegistrations;
 
 public static class CosmosDbRegistration
 {

@@ -1,4 +1,4 @@
-namespace Whoop.Commons.Services;
+namespace Whoop.Core.Services;
 
 public class ProfileService(
     CosmosDbOperations cosmosDbOperations,

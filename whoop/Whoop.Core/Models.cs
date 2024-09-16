@@ -1,6 +1,5 @@
 // ReSharper disable InconsistentNaming
 
-using System;
 using System.Diagnostics.CodeAnalysis;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
@@ -8,7 +7,7 @@ using Whoop.Sdk.Model;
 
 // ReSharper disable NotAccessedPositionalProperty.Global
 
-namespace Whoop.Commons;
+namespace Whoop.Core;
 
 [SuppressMessage("ReSharper", "UnusedMember.Global")]
 public record CycleDto(
