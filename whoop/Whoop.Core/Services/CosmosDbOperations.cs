@@ -1,12 +1,10 @@
 using Microsoft.Azure.Cosmos;
 using Microsoft.Azure.Cosmos.Linq;
-using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 
 namespace Whoop.Core.Services;
 
 public class CosmosDbOperations(
-    IConfiguration configuration, 
     ILogger<CosmosDbOperations> logger, 
     Container container)
 {
@@ -38,5 +36,15 @@ public class CosmosDbOperations(
     public async Task UpsertProfileAsync(ProfileDto profile)
     {
         await container.UpsertItemAsync(profile, new PartitionKey(profile.Id));
+    }
+    
+    public async Task BulkUpsertCyclesAsync(IEnumerable<CycleDto> items)
+    {
+        var tasks = items
+            .Select(cycleDto => container.UpsertItemAsync(cycleDto, new PartitionKey(cycleDto.Id)))
+            .Cast<Task>()
+            .ToList();
+
+        await Task.WhenAll(tasks);
     }
 }

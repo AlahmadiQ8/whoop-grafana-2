@@ -10,24 +10,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="e52df4b9-a088-4a57-ad69-a8d9c3bd7c15" name="Changes" comment="Step 5 - migrate to durable functions">
-      <change afterPath="$PROJECT_DIR$/Whoop.Core/Services/CyclesService.cs" afterDir="false" />
+    <list default="true" id="e52df4b9-a088-4a57-ad69-a8d9c3bd7c15" name="Changes" comment="add CyclesService.cs">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.whoop/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.whoop/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Whoop.Commons/Mappers.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Whoop.Core/Mappers.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Whoop.Commons/Models.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Whoop.Core/Models.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Whoop.Commons/ServiceRegistrations/CosmosDbRegistration.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Whoop.Core/ServiceRegistrations/CosmosDbRegistration.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Whoop.Commons/Services/CosmosDbOperations.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Whoop.Core/Services/CosmosDbOperations.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Whoop.Commons/Services/ProfileService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Whoop.Core/Services/ProfileService.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Whoop.Commons/Services/WhoopServices.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Whoop.Core/Services/WhoopServices.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Whoop.Commons/Whoop.Commons.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/Whoop.Core/Whoop.Core.csproj" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Whoop.Commons/WhoopSettings.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Whoop.Core/WhoopSettings.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Whoop.Console/ConsoleApp.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Whoop.Console/ConsoleApp.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Whoop.Console/Program.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Whoop.Console/Program.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Whoop.Console/Whoop.Console.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/Whoop.Console/Whoop.Console.csproj" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Whoop.Functions/Startup.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Whoop.Functions/Startup.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Whoop.Functions/Whoop.Functions.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/Whoop.Functions/Whoop.Functions.csproj" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Whoop.Functions/WhoopOrchestrator.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Whoop.Functions/WhoopOrchestrator.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/whoop.sln" beforeDir="false" afterPath="$PROJECT_DIR$/whoop.sln" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Whoop.Core/Services/CosmosDbOperations.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Whoop.Core/Services/CosmosDbOperations.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Whoop.Core/Services/CyclesService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Whoop.Core/Services/CyclesService.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -77,6 +63,7 @@
     <setting file="file://$PROJECT_DIR$/Whoop.Core/Services/CyclesService.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="mock:///Users/mohammadmohammad/Dev/whoop-grafana/whoop/Whoop.Functions/Startup.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="mock:///Users/mohammadmohammad/Dev/whoop-grafana/whoop/Whoop.Functions/Startup.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///Users/mohammadmohammad/Dev/whoop-grafana/whoop/Whoop.Functions/WhoopOrchestrator.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="mock:///Users/mohammadmohammad/Dev/whoop-grafana/whoop/Whoop.Sdk/Client/Auth/ITokenRefresher.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="mock:///Users/mohammadmohammad/Dev/whoop-grafana/whoop/Whoop.Sdk/Client/Auth/ITokenRefresher.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="mock:///Users/mohammadmohammad/Dev/whoop-grafana/whoop/Whoop.Sdk/Client/Auth/OAuthAuthenticator.cs" root0="SKIP_HIGHLIGHTING" />
@@ -118,7 +105,22 @@
     "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
-  <component name="RunManager">
+  <component name="RunManager" selected="Azure - Function App.Azure - Function App: whoop ">
+    <configuration name="Azure - Function App: whoop " type="AzureFunctionAppDeploy">
+      <option name="appServicePlanName" value="ASP-whoopgrafanav2-ac14" />
+      <option name="appServicePlanResourceGroupName" value="whoop-grafana-v2" />
+      <option name="functionAppName" value="WhoopGrafanaV2" />
+      <option name="operatingSystem" value="Linux" />
+      <option name="pricingSize" value="Y1" />
+      <option name="pricingTier" value="Dynamic" />
+      <option name="projectConfiguration" value="Release" />
+      <option name="projectPlatform" value="Any CPU" />
+      <option name="publishableProjectPath" value="$PROJECT_DIR$/Whoop.Functions/Whoop.Functions.csproj" />
+      <option name="region" value="eastus2" />
+      <option name="resourceGroupName" value="whoop-grafana-v2" />
+      <option name="subscriptionId" value="96ad0374-6fb5-4967-b5ff-f51032c2527e" />
+      <method v="2" />
+    </configuration>
     <configuration name="Whoop.Console" type="DotNetProject" factoryName=".NET Project">
       <option name="EXE_PATH" value="$PROJECT_DIR$/Whoop.Console/bin/Debug/net8.0/Whoop.Console" />
       <option name="PROGRAM_PARAMETERS" value="" />
@@ -137,6 +139,10 @@
         <option name="Build" />
       </method>
     </configuration>
+    <list>
+      <item itemvalue=".NET Project.Whoop.Console" />
+      <item itemvalue="Azure - Function App.Azure - Function App: whoop " />
+    </list>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
@@ -232,7 +238,15 @@
       <option name="project" value="LOCAL" />
       <updated>1726506726568</updated>
     </task>
-    <option name="localTasksCounter" value="10" />
+    <task id="LOCAL-00010" summary="add CyclesService.cs">
+      <option name="closed" value="true" />
+      <created>1726512553387</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1726512553387</updated>
+    </task>
+    <option name="localTasksCounter" value="11" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -279,7 +293,8 @@
     <MESSAGE value="Step 1" />
     <MESSAGE value="Step 3" />
     <MESSAGE value="Step 5 - migrate to durable functions" />
-    <option name="LAST_COMMIT_MESSAGE" value="Step 5 - migrate to durable functions" />
+    <MESSAGE value="add CyclesService.cs" />
+    <option name="LAST_COMMIT_MESSAGE" value="add CyclesService.cs" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />
