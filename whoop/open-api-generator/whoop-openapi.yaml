@@ -610,6 +610,7 @@ components:
           example: 95.6875
         skin_temp_celsius:
           type: number
+          nullable: true
           description: The user's skin temperature, in Celsius. Only present if the user is on 4.0 or greater.
           format: float
           example: 33.7

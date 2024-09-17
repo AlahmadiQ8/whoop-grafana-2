@@ -21,7 +21,7 @@ public record CycleDto(
     Cycle.ScoreStateEnum CycleScoreState,
     CycleScoreDto? CycleScore,
     string? SleepId = null,
-    RecoveryScore? RecoveryScore = null)
+    RecoveryScoreDto? RecoveryScore = null)
 {
     public Type Type { get; init; } = Type.Cycle;
 }
@@ -33,8 +33,8 @@ public record RecoveryScoreDto(
     float RecoveryScore,
     float RestingHeartRate,
     float HrvRmssdMilli,
-    float Spo2Percentage,
-    float SkinTempCelsius);
+    float? Spo2Percentage,
+    float? SkinTempCelsius);
 
 public record ProfileDto(
     string Id, 

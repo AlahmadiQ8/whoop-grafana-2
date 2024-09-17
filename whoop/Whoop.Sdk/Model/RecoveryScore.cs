@@ -45,7 +45,7 @@ namespace Whoop.Sdk.Model
         /// <param name="hrvRmssdMilli">The user&#39;s Heart Rate Variability measured using Root Mean Square of Successive Differences (RMSSD), in milliseconds. (required).</param>
         /// <param name="spo2Percentage">The percentage of oxygen in the user&#39;s blood. Only present if the user is on 4.0 or greater..</param>
         /// <param name="skinTempCelsius">The user&#39;s skin temperature, in Celsius. Only present if the user is on 4.0 or greater..</param>
-        public RecoveryScore(bool userCalibrating = default(bool), float varRecoveryScore = default(float), float restingHeartRate = default(float), float hrvRmssdMilli = default(float), float spo2Percentage = default(float), float skinTempCelsius = default(float))
+        public RecoveryScore(bool userCalibrating = default(bool), float varRecoveryScore = default(float), float restingHeartRate = default(float), float hrvRmssdMilli = default(float), float spo2Percentage = default(float), float? skinTempCelsius = default(float?))
         {
             this.UserCalibrating = userCalibrating;
             this.VarRecoveryScore = varRecoveryScore;
@@ -100,8 +100,8 @@ namespace Whoop.Sdk.Model
         /// </summary>
         /// <value>The user&#39;s skin temperature, in Celsius. Only present if the user is on 4.0 or greater.</value>
         /// <example>33.7</example>
-        [DataMember(Name = "skin_temp_celsius", EmitDefaultValue = false)]
-        public float SkinTempCelsius { get; set; }
+        [DataMember(Name = "skin_temp_celsius", EmitDefaultValue = true)]
+        public float? SkinTempCelsius { get; set; }
 
         /// <summary>
         /// Returns the string presentation of the object

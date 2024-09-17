@@ -49,7 +49,7 @@ public class CosmosDbOperations(
         await Task.WhenAll(tasks);
     }
 
-    public async Task BulkUpdateCyclesWithRecoveryDataAsync(Recovery[] recoveries)
+    public async Task BulkUpdateCyclesWithRecoveryDataAsync(IList<Recovery> recoveries)
     {
         var tasks = recoveries.Select(recovery =>
                 container.PatchItemAsync<CycleDto>(
@@ -57,7 +57,7 @@ public class CosmosDbOperations(
                     partitionKey: new PartitionKey(recovery.CycleId.ToString()),
                     patchOperations:
                     [
-                        PatchOperation.Set("/sleepId", recovery.SleepId),
+                        PatchOperation.Set("/sleepId", recovery.SleepId.ToString()),
                         // ReSharper disable once ConditionalAccessQualifierIsNonNullableAccordingToAPIContract
                         PatchOperation.Set("/recoveryScore", recovery.Score?.ToRecoveryScoreDto())
                     ]
