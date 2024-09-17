@@ -10,16 +10,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="e52df4b9-a088-4a57-ad69-a8d9c3bd7c15" name="Changes" comment="started with recovery">
-      <change beforePath="$PROJECT_DIR$/../whoop-openapi.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/../whoop-openapi.yaml" afterDir="false" />
+    <list default="true" id="e52df4b9-a088-4a57-ad69-a8d9c3bd7c15" name="Changes" comment="fixed recovery">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.whoop/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.whoop/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Whoop.Console/ConsoleApp.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Whoop.Console/ConsoleApp.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Whoop.Core/Models.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Whoop.Core/Models.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Whoop.Core/Services/CosmosDbOperations.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Whoop.Core/Services/CosmosDbOperations.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Whoop.Core/Services/RecoveryService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Whoop.Core/Services/RecoveryService.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Whoop.Sdk/Model/RecoveryScore.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Whoop.Sdk/Model/RecoveryScore.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/open-api-generator/generate.sh" beforeDir="false" afterPath="$PROJECT_DIR$/open-api-generator/generate.sh" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/open-api-generator/whoop-openapi.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/open-api-generator/whoop-openapi.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Whoop.Functions/WhoopOrchestrator.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Whoop.Functions/WhoopOrchestrator.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -91,6 +85,7 @@
     <setting file="mock:///Users/mohammadmohammad/Dev/whoop-grafana/whoop/Whoop.Core/Services/CosmosDbOperations.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Whoop.Core/Services/CyclesService.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="mock:///Users/mohammadmohammad/Dev/whoop-grafana/whoop/Whoop.Core/Services/CyclesService.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///Users/mohammadmohammad/Dev/whoop-grafana/whoop/Whoop.Core/Services/RecoveryService.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="mock:///Users/mohammadmohammad/Dev/whoop-grafana/whoop/Whoop.Core/Services/RecoveryService.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="mock:///Users/mohammadmohammad/Dev/whoop-grafana/whoop/Whoop.Core/Services/WhoopServices.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="mock:///Users/mohammadmohammad/Dev/whoop-grafana/whoop/Whoop.Functions/Startup.cs" root0="SKIP_HIGHLIGHTING" />
@@ -307,7 +302,15 @@
       <option name="project" value="LOCAL" />
       <updated>1726561062222</updated>
     </task>
-    <option name="localTasksCounter" value="13" />
+    <task id="LOCAL-00013" summary="fixed recovery">
+      <option name="closed" value="true" />
+      <created>1726569729170</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1726569729170</updated>
+    </task>
+    <option name="localTasksCounter" value="14" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -357,7 +360,8 @@
     <MESSAGE value="add CyclesService.cs" />
     <MESSAGE value="refactor" />
     <MESSAGE value="started with recovery" />
-    <option name="LAST_COMMIT_MESSAGE" value="started with recovery" />
+    <MESSAGE value="fixed recovery" />
+    <option name="LAST_COMMIT_MESSAGE" value="fixed recovery" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -387,19 +391,6 @@
             </endOffsets>
           </properties>
           <option name="timeStamp" value="8" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="DotNet Breakpoints">
-          <url>file://$PROJECT_DIR$/Whoop.Core/Services/RecoveryService.cs</url>
-          <line>38</line>
-          <properties documentPath="$PROJECT_DIR$/Whoop.Core/Services/RecoveryService.cs" containingFunctionPresentation="Method 'FetchRecoveries'">
-            <startOffsets>
-              <option value="1266" />
-            </startOffsets>
-            <endOffsets>
-              <option value="1468" />
-            </endOffsets>
-          </properties>
-          <option name="timeStamp" value="35" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

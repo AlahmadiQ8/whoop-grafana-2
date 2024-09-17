@@ -28,12 +28,14 @@ public class WhoopOrchestrator(ProfileService profileService, CyclesService cycl
         // **********************************
         // Step 2: Upsert Cycles
         // **********************************
+        // TODO: Respect rate limiting for recoveries
         var listOfCycleIds = await context.CallActivityAsync<IList<string>>(nameof(UpdateCyclesActivity), userId);
         log.LogInformation("Ids upserted: {listOfCycleIds}", new {listOfCycleIds = string.Join(',', listOfCycleIds)});
         
         // **********************************
         // Step 3: Upsert Recorveries
         // **********************************
+        // TODO: Respect rate limiting for recoveries
         var sleepIds = await context.CallActivityAsync<IList<string>>(nameof(UpdateRecoveryActivity), new RecoveryActivityInput { UserId = userId, CycleIds = listOfCycleIds });
         log.LogInformation("sleepIds returned: {sleepIds}", new {sleepIds = string.Join(',', sleepIds)});
         

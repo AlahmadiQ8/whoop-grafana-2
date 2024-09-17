@@ -22,10 +22,10 @@ public class RecoveryService(
 
         var results = await FetchRecoveries(recoveryApi, cycleIds);
         logger.LogInformation("fetched recoveries: {recCount}", results.Count);
-        
+
         await cosmosDbOperations.BulkUpdateCyclesWithRecoveryDataAsync(results);
-        
-        return results.Select(r => r.SleepId.ToString()).ToList();;
+
+        return results.Select(r => r.SleepId.ToString()).ToList();
     }
 
     private async Task<List<Recovery>> FetchRecoveries(RecoveryApi recoveryApi, IList<string> cycleIds)
@@ -35,16 +35,17 @@ public class RecoveryService(
 
         try
         {
-            var res = await Task.WhenAll(tasks);
-            return res
-                // ReSharper disable once ConditionIsAlwaysTrueOrFalseAccordingToNullableAPIContract
-                .Where(r => r.Data != null)
-                .Select(r => r.Data).ToList();
+            await Task.WhenAll(tasks);
         }
         catch (Exception ex)
         {
             logger.LogInformation("OMG Caught Exception: {ex} : {errorMessage}", ex, ex.Message);
-            return [];
         }
+
+        return tasks.Where(r => r.Status == TaskStatus.RanToCompletion)
+            .Select(r => r.Result.Data)
+            // ReSharper disable once ConditionIsAlwaysTrueOrFalseAccordingToNullableAPIContract
+            .Where(r => r != null)
+            .ToList();
     }
 }
