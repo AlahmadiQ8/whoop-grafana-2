@@ -14,12 +14,21 @@ public static class Mappers
             Start: cycle.Start,
             End: cycle.End,
             TimeZoneOffset: cycle.TimezoneOffset,
-            ScoreState: cycle.ScoreState,
+            CycleScoreState: cycle.ScoreState,
             // ReSharper disable once ConditionalAccessQualifierIsNonNullableAccordingToAPIContract
-            Score: cycle.Score?.ToCycleScoreDto(),
-            Email: userProfile.Email,
-            FirstName: userProfile.FirstName,
-            LastName: userProfile.LastName
+            CycleScore: cycle.Score?.ToCycleScoreDto()
+        );
+    }
+    
+    public static RecoveryScoreDto ToRecoveryScoreDto(this RecoveryScore recoveryScore)
+    {
+        return new RecoveryScoreDto(
+            UserCalibrating: recoveryScore.UserCalibrating,
+            RecoveryScore: recoveryScore.VarRecoveryScore,
+            RestingHeartRate: recoveryScore.RestingHeartRate,
+            HrvRmssdMilli: recoveryScore.HrvRmssdMilli,
+            Spo2Percentage: recoveryScore.Spo2Percentage,
+            SkinTempCelsius: recoveryScore.SkinTempCelsius
         );
     }
 

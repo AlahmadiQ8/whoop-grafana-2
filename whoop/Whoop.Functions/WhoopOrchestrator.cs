@@ -10,7 +10,7 @@ using Whoop.Core.Services;
 
 namespace Whoop.Functions;
 
-public class WhoopOrchestrator(ProfileService profileService, CyclesService cyclesService)
+public class WhoopOrchestrator(ProfileService profileService, CyclesService cyclesService, RecoveryService recoveryService)
 {
     private const string UserId = "18435265";
 
@@ -26,10 +26,16 @@ public class WhoopOrchestrator(ProfileService profileService, CyclesService cycl
         await context.CallActivityAsync(nameof(RefreshTokenActivity), userId);
 
         // **********************************
-        // Step 2: Fetch Cycles
+        // Step 2: Upsert Cycles
         // **********************************
         var listOfCycleIds = await context.CallActivityAsync<IList<string>>(nameof(UpdateCyclesActivity), userId);
         log.LogInformation("Ids upserted: {listOfCycleIds}", new {listOfCycleIds = string.Join(',', listOfCycleIds)});
+        
+        // **********************************
+        // Step 3: Upsert Recorveries
+        // **********************************
+        var sleepIds = await context.CallActivityAsync<IList<string>>(nameof(UpdateRecoveryActivity), new RecoveryActivityInput { UserId = userId, CycleIds = listOfCycleIds });
+        log.LogInformation("sleepIds returned: {sleepIds}", new {sleepIds = string.Join(',', sleepIds)});
         
         log.LogInformation("inside Orchestrator completed for userId '{userId}'", userId);
     }
@@ -44,6 +50,12 @@ public class WhoopOrchestrator(ProfileService profileService, CyclesService cycl
     public async Task<IList<string>> UpdateCyclesActivity([ActivityTrigger] string userId, ILogger log)
     {
         return await cyclesService.UpdateCyclesAsync(userId);
+    }
+    
+    [FunctionName(nameof(UpdateRecoveryActivity))]
+    public async Task<IList<string>> UpdateRecoveryActivity([ActivityTrigger] RecoveryActivityInput input, ILogger log)
+    {
+        return await recoveryService.UpdateRecoveriesAsync(input.UserId, input.CycleIds);
     }
 
     [FunctionName(nameof(MyTestFunction))]
@@ -61,4 +73,10 @@ public class WhoopOrchestrator(ProfileService profileService, CyclesService cycl
 public class OrchestratorInput
 {
     public string UserId { get; init; }
+}
+
+public class RecoveryActivityInput
+{
+    public string UserId { get; init; }
+    public IList<string> CycleIds { get; init; }
 }

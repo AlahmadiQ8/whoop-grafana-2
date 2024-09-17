@@ -23,6 +23,7 @@ public class Startup : FunctionsStartup
             .AddSingleton<ProfileService>()
             .AddSingleton<CyclesService>()
             .AddSingleton<WhoopServices>()
+            .AddSingleton<RecoveryService>()
             .AddOptions<WhoopSettings>()
             .Configure<IConfiguration>((settings, configuration) =>
             {

@@ -1,22 +1,23 @@
 using Microsoft.Azure.Cosmos;
 using Microsoft.Azure.Cosmos.Linq;
 using Microsoft.Extensions.Logging;
+using Whoop.Sdk.Model;
 
 namespace Whoop.Core.Services;
 
 public class CosmosDbOperations(
-    ILogger<CosmosDbOperations> logger, 
+    ILogger<CosmosDbOperations> logger,
     Container container)
 {
     public async Task<CycleDto?> GetLastInsertedCycleAsync()
     {
-        var linqFeed  = container.GetItemLinqQueryable<CycleDto>()
+        var linqFeed = container.GetItemLinqQueryable<CycleDto>()
             .Where(c => c.Type == Type.Cycle)
             .OrderByDescending(c => c.Start)
             .ToFeedIterator();
 
-        return !linqFeed.HasMoreResults 
-            ? null 
+        return !linqFeed.HasMoreResults
+            ? null
             : (await linqFeed.ReadNextAsync()).FirstOrDefault();
     }
 
@@ -37,11 +38,31 @@ public class CosmosDbOperations(
     {
         await container.UpsertItemAsync(profile, new PartitionKey(profile.Id));
     }
-    
+
     public async Task BulkUpsertCyclesAsync(IEnumerable<CycleDto> items)
     {
         var tasks = items
             .Select(cycleDto => container.UpsertItemAsync(cycleDto, new PartitionKey(cycleDto.Id)))
+            .Cast<Task>()
+            .ToList();
+
+        await Task.WhenAll(tasks);
+    }
+
+    public async Task BulkUpdateCyclesWithRecoveryDataAsync(Recovery[] recoveries)
+    {
+        var tasks = recoveries.Select(recovery =>
+                container.PatchItemAsync<CycleDto>(
+                    id: recovery.CycleId.ToString(),
+                    partitionKey: new PartitionKey(recovery.CycleId.ToString()),
+                    patchOperations:
+                    [
+                        PatchOperation.Set("/sleepId", recovery.SleepId),
+                        // ReSharper disable once ConditionalAccessQualifierIsNonNullableAccordingToAPIContract
+                        PatchOperation.Set("/recoveryScore", recovery.Score?.ToRecoveryScoreDto())
+                    ]
+                )
+            )
             .Cast<Task>()
             .ToList();
 

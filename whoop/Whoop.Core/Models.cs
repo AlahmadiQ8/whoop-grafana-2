@@ -18,16 +18,23 @@ public record CycleDto(
     DateTime Start,
     DateTime? End,
     string TimeZoneOffset,
-    Cycle.ScoreStateEnum ScoreState,
-    CycleScoreDto? Score,
-    string Email,
-    string FirstName,
-    string LastName)
+    Cycle.ScoreStateEnum CycleScoreState,
+    CycleScoreDto? CycleScore,
+    string? SleepId = null,
+    RecoveryScore? RecoveryScore = null)
 {
     public Type Type { get; init; } = Type.Cycle;
 }
 
 public record CycleScoreDto(float Strain, float Kilojoule, float AverageHeartRate, float MaxHeartRate);
+
+public record RecoveryScoreDto(
+    bool UserCalibrating,
+    float RecoveryScore,
+    float RestingHeartRate,
+    float HrvRmssdMilli,
+    float Spo2Percentage,
+    float SkinTempCelsius);
 
 public record ProfileDto(
     string Id, 
