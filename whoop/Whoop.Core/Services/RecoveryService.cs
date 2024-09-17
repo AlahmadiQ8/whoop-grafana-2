@@ -1,3 +1,4 @@
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 using Whoop.Sdk.Api;
 using Whoop.Sdk.Client;
@@ -7,25 +8,46 @@ namespace Whoop.Core.Services;
 
 public class RecoveryService(
     CosmosDbOperations cosmosDbOperations,
-    ILogger<RecoveryService> logger
+    ILogger<RecoveryService> logger,
+    IConfiguration configuration
 )
 {
-    public async Task<IList<string>> UpdateRecoveriesAsync(string userId, IList<string> cycleIds)
+    private readonly int _fetchLimit = configuration.GetValue<int>("RecordsFetchLimit");
+    private readonly int _daysFromLastInserted = configuration.GetValue<int>("DaysFromLastInserted");
+    
+    public async Task UpdateRecoveriesAsync(string userId)
     {
+        var totalCount = 0;
+        string? nextToken = null;
+        
+        var lastInsertedCycleNoRecoveryStartTimeMinus1 = (await cosmosDbOperations.GetLastInsertedCycleWithRecoveryDataAsync())?.Start.Subtract(TimeSpan.FromDays(_daysFromLastInserted));
+        
+        if (lastInsertedCycleNoRecoveryStartTimeMinus1 != null)
+            logger.LogInformation("Last inserted cycle with recovery data was at {start}", lastInsertedCycleNoRecoveryStartTimeMinus1);
+        else
+            logger.LogInformation("No items found");
+        
         var profile = await cosmosDbOperations.GetProfileAsync(userId);
         ArgumentNullException.ThrowIfNull(profile);
+        
+        var recoveryApi = new RecoveryApi(new Configuration { AccessToken = profile.AccessToken });
 
-        var recoveryApi = new RecoveryApi(new Configuration
+        do
         {
-            AccessToken = profile.AccessToken,
-        });
-
-        var results = await FetchRecoveries(recoveryApi, cycleIds);
-        logger.LogInformation("fetched recoveries: {recCount}", results.Count);
-
-        await cosmosDbOperations.BulkUpdateCyclesWithRecoveryDataAsync(results);
-
-        return results.Select(r => r.SleepId.ToString()).ToList();
+            var res = await recoveryApi.GetRecoveryCollectionAsync(
+                limit: _fetchLimit,
+                start: lastInsertedCycleNoRecoveryStartTimeMinus1,
+                nextToken: nextToken);
+            
+            nextToken = res.NextToken;
+            totalCount += res.Records.Count;
+            logger.LogInformation("Total fetched so far: {totalCount} records", totalCount);
+            
+            await cosmosDbOperations.BulkUpdateCyclesWithRecoveryDataAsync(res.Records);
+            logger.LogInformation("Upserted so far: {totalCount} records", totalCount);
+            
+            // ReSharper disable once ConditionIsAlwaysTrueOrFalseAccordingToNullableAPIContract
+        } while(nextToken != null);
     }
 
     private async Task<List<Recovery>> FetchRecoveries(RecoveryApi recoveryApi, IList<string> cycleIds)

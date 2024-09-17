@@ -24,6 +24,7 @@ public class Startup : FunctionsStartup
             .AddSingleton<CyclesService>()
             .AddSingleton<WhoopServices>()
             .AddSingleton<RecoveryService>()
+            .AddSingleton<SleepService>()
             .AddOptions<WhoopSettings>()
             .Configure<IConfiguration>((settings, configuration) =>
             {

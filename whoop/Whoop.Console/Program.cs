@@ -15,6 +15,7 @@ appBuilder.Services.AddSingleton<WhoopServices>();
 appBuilder.Services.AddSingleton<ProfileService>();
 appBuilder.Services.AddSingleton<CyclesService>();
 appBuilder.Services.AddSingleton<RecoveryService>();
+appBuilder.Services.AddSingleton<SleepService>();
 appBuilder.Services.RegisterCosmosDb();
 
 using var app = appBuilder.Build();

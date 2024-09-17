@@ -21,6 +21,32 @@ public class CosmosDbOperations(
             : (await linqFeed.ReadNextAsync()).FirstOrDefault();
     }
 
+    public async Task<CycleDto?> GetLastInsertedCycleWithRecoveryDataAsync()
+    {
+        var linqFeed = container.GetItemLinqQueryable<CycleDto>()
+            .Where(c => c.Type == Type.Cycle)
+            .Where(c => c.RecoveryScore != null)
+            .OrderByDescending(c => c.Start)
+            .ToFeedIterator();
+
+        return !linqFeed.HasMoreResults
+            ? null
+            : (await linqFeed.ReadNextAsync()).FirstOrDefault();
+    }
+
+    public async Task<CycleDto?> GetLastInsertedCycleWithSleepDataAsync()
+    {
+        var linqFeed = container.GetItemLinqQueryable<CycleDto>()
+            .Where(c => c.Type == Type.Cycle)
+            .Where(c => c.SleepScore != null)
+            .OrderByDescending(c => c.Start)
+            .ToFeedIterator();
+
+        return !linqFeed.HasMoreResults
+            ? null
+            : (await linqFeed.ReadNextAsync()).FirstOrDefault();
+    }
+
     public async Task<ProfileDto?> GetProfileAsync(string userId)
     {
         var linkFeed = container
@@ -67,5 +93,43 @@ public class CosmosDbOperations(
             .ToList();
 
         await Task.WhenAll(tasks);
+    }
+
+    public async Task BulkUpdateCyclesWithSleepDataAsync(IList<Sleep> sleeps)
+    {
+        var cycles = await GetCyclesFromSleepIdsAsync(sleeps.Select(s => s.Id.ToString()).ToList());
+
+        var tasks = cycles.Select(cycle =>
+            container.PatchItemAsync<CycleDto>(
+                id: cycle.Id,
+                partitionKey: new PartitionKey(cycle.Id.ToString()),
+                patchOperations: [
+                    PatchOperation.Set("/sleepScore", sleeps.First(s => s.Id.ToString() == cycle.SleepId).ToSleepDto())
+                ]
+            )
+        ).Cast<Task>()
+        .ToList();
+        
+        await Task.WhenAll(tasks);
+    }
+
+    private async Task<IList<CycleDto>> GetCyclesFromSleepIdsAsync(IList<string> sleepIds)
+    {
+        var query = new QueryDefinition(query: "SELECT * FROM c where ARRAY_CONTAINS(@ids, c.sleepId)")
+            .WithParameter("@ids", sleepIds);
+
+        using FeedIterator<CycleDto> filteredFeed = container.GetItemQueryIterator<CycleDto>(
+            queryDefinition: query
+        );
+
+        var cycles = new List<CycleDto>();
+
+        while (filteredFeed.HasMoreResults)
+        {
+            var response = await filteredFeed.ReadNextAsync();
+            cycles.AddRange(response);
+        }
+
+        return cycles;
     }
 }

@@ -724,16 +724,19 @@ components:
           $ref: '#/components/schemas/SleepNeeded'
         respiratory_rate:
           type: number
+          nullable: true
           description: The user's respiratory rate during the sleep.
           format: float
           example: 16.11328125
         sleep_performance_percentage:
           type: number
+          nullable: true
           description: A percentage (0-100%) of the time a user is asleep over the amount of sleep the user needed. May not be reported if WHOOP does not have enough data about a user yet to calculate Sleep Need.
           format: float
           example: 98
         sleep_consistency_percentage:
           type: number
+          nullable: true
           description: Percentage (0-100%) of how similar this sleep and wake times compared to the previous day. May not be reported if WHOOP does not have enough sleep data about a user yet to understand consistency.
           format: float
           example: 90
@@ -742,6 +745,7 @@ components:
             url: https://www.whoop.com/thelocker/new-feature-sleep-consistency-why-we-track-it/
         sleep_efficiency_percentage:
           type: number
+          nullable: true
           description: A percentage (0-100%) of the time you spend in bed that you are actually asleep.
           format: float
           example: 91.69533848

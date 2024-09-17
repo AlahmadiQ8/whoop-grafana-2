@@ -21,10 +21,39 @@ public record CycleDto(
     Cycle.ScoreStateEnum CycleScoreState,
     CycleScoreDto? CycleScore,
     string? SleepId = null,
-    RecoveryScoreDto? RecoveryScore = null)
+    RecoveryScoreDto? RecoveryScore = null,
+    SleepDto? SleepScore = null)
 {
     public Type Type { get; init; } = Type.Cycle;
 }
+
+public record SleepDto(
+    bool Nap,
+    SleepStageSummaryDto SleepStageSummary,
+    SleepNeededDto SleepNeeded,
+    float? RespiratoryRate,
+    float? SleepPerformancePercentage,
+    float? SleepConsistencyPercentage,
+    float? SleepEfficiencyPercentage
+);
+
+public record SleepStageSummaryDto(
+    int TotalInBedTimeMilli,
+    int TotalAwakeTimeMilli,
+    int TotalNoDataTimeMilli,
+    int TotalLightSleepTimeMilli,
+    int TotalSlowWaveSleepTimeMilli,
+    int TotalRemSleepTimeMilli,
+    int SleepCycleCount,
+    int DisturbanceCount
+);
+
+public record SleepNeededDto(
+    long BaselineMilli,
+    long NeedFromSleepDebtMilli,
+    long NeedFromRecentStrainMilli,
+    long NeedFromRecentNapMilli
+);
 
 public record CycleScoreDto(float Strain, float Kilojoule, float AverageHeartRate, float MaxHeartRate);
 

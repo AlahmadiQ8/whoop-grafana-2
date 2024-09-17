@@ -19,7 +19,7 @@ public static class Mappers
             CycleScore: cycle.Score?.ToCycleScoreDto()
         );
     }
-    
+
     public static RecoveryScoreDto ToRecoveryScoreDto(this RecoveryScore recoveryScore)
     {
         return new RecoveryScoreDto(
@@ -29,6 +29,43 @@ public static class Mappers
             HrvRmssdMilli: recoveryScore.HrvRmssdMilli,
             Spo2Percentage: recoveryScore.Spo2Percentage,
             SkinTempCelsius: recoveryScore.SkinTempCelsius
+        );
+    }
+
+    public static SleepDto ToSleepDto(this Sleep sleep)
+    {
+        return new SleepDto(
+            Nap: sleep.Nap,
+            SleepStageSummary: sleep.Score.StageSummary.ToSleepStageSummaryDto(),
+            SleepNeeded: sleep.Score.SleepNeeded.ToSleepNeededDto(),
+            RespiratoryRate: sleep.Score.RespiratoryRate,
+            SleepPerformancePercentage: sleep.Score.SleepPerformancePercentage,
+            SleepConsistencyPercentage: sleep.Score.SleepConsistencyPercentage,
+            SleepEfficiencyPercentage: sleep.Score.SleepEfficiencyPercentage
+        );
+    }
+
+    private static SleepStageSummaryDto ToSleepStageSummaryDto(this SleepStageSummary sleepStageSummary)
+    {
+        return new SleepStageSummaryDto(
+            TotalInBedTimeMilli: sleepStageSummary.TotalInBedTimeMilli,
+            TotalAwakeTimeMilli: sleepStageSummary.TotalAwakeTimeMilli,
+            TotalNoDataTimeMilli: sleepStageSummary.TotalNoDataTimeMilli,
+            TotalLightSleepTimeMilli: sleepStageSummary.TotalLightSleepTimeMilli,
+            TotalSlowWaveSleepTimeMilli: sleepStageSummary.TotalSlowWaveSleepTimeMilli,
+            TotalRemSleepTimeMilli: sleepStageSummary.TotalRemSleepTimeMilli,
+            SleepCycleCount: sleepStageSummary.SleepCycleCount,
+            DisturbanceCount: sleepStageSummary.DisturbanceCount
+        );
+    }
+
+    private static SleepNeededDto ToSleepNeededDto(this SleepNeeded sleepNeeded)
+    {
+        return new SleepNeededDto(
+            BaselineMilli: sleepNeeded.BaselineMilli,
+            NeedFromSleepDebtMilli: sleepNeeded.NeedFromSleepDebtMilli,
+            NeedFromRecentStrainMilli: sleepNeeded.NeedFromRecentStrainMilli,
+            NeedFromRecentNapMilli: sleepNeeded.NeedFromRecentNapMilli
         );
     }
 

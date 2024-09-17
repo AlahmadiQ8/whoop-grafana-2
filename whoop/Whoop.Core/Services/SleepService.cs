@@ -5,47 +5,45 @@ using Whoop.Sdk.Client;
 
 namespace Whoop.Core.Services;
 
-public class CyclesService(
-    ILogger<CyclesService> logger,
+public class SleepService(
     CosmosDbOperations cosmosDbOperations,
+    ILogger<SleepService> logger,
     IConfiguration configuration)
 {
     private readonly int _fetchLimit = configuration.GetValue<int>("RecordsFetchLimit");
     private readonly int _daysFromLastInserted = configuration.GetValue<int>("DaysFromLastInserted");
 
-    public async Task UpdateCyclesAsync(string userId)
+    public async Task UpdateSleepAsync(string userId)
     {
         var totalCount = 0;
         string? nextToken = null;
-
-        var lastInsertedCycleStartTimeMinus1 =
-            (await cosmosDbOperations.GetLastInsertedCycleAsync())?.Start.Subtract(
-                TimeSpan.FromDays(_daysFromLastInserted));
-
-        if (lastInsertedCycleStartTimeMinus1 != null)
-            logger.LogInformation("Last inserted cycle was at {start}", lastInsertedCycleStartTimeMinus1);
+        
+        var lastInsertedCycleSleepDataStartTimeMinusXDays = (await cosmosDbOperations.GetLastInsertedCycleWithSleepDataAsync())?.Start.Subtract(TimeSpan.FromDays(_daysFromLastInserted));
+        
+        if (lastInsertedCycleSleepDataStartTimeMinusXDays != null)
+            logger.LogInformation("Last inserted cycle with sleep data was at {start}", lastInsertedCycleSleepDataStartTimeMinusXDays);
         else
-            logger.LogInformation("No items found");
-
+            logger.LogInformation("No items with sleep data found");
+        
         var profile = await cosmosDbOperations.GetProfileAsync(userId);
         ArgumentNullException.ThrowIfNull(profile);
-
-        var cycleApi = new CycleApi(new Configuration { AccessToken = profile.AccessToken });
+        
+        var sleepApi = new SleepApi(new Configuration { AccessToken = profile.AccessToken });
 
         do
         {
-            var res = await cycleApi.GetCycleCollectionAsync(
+            var res = await sleepApi.GetSleepCollectionAsync(
                 limit: _fetchLimit,
-                start: lastInsertedCycleStartTimeMinus1,
+                start: lastInsertedCycleSleepDataStartTimeMinusXDays,
                 nextToken: nextToken);
+            
             nextToken = res.NextToken;
             totalCount += res.Records.Count;
             logger.LogInformation("Total fetched so far: {totalCount} records", totalCount);
-
-            await cosmosDbOperations.BulkUpsertCyclesAsync(res.Records.Select(r => r.ToCycleDto(profile)));
+            
+            await cosmosDbOperations.BulkUpdateCyclesWithSleepDataAsync(res.Records);
             logger.LogInformation("Upserted so far: {totalCount} records", totalCount);
-
             // ReSharper disable once ConditionIsAlwaysTrueOrFalseAccordingToNullableAPIContract
-        } while (nextToken != null);
+        } while(nextToken != null);
     }
 }

@@ -45,7 +45,7 @@ namespace Whoop.Sdk.Model
         /// <param name="sleepPerformancePercentage">A percentage (0-100%) of the time a user is asleep over the amount of sleep the user needed. May not be reported if WHOOP does not have enough data about a user yet to calculate Sleep Need..</param>
         /// <param name="sleepConsistencyPercentage">Percentage (0-100%) of how similar this sleep and wake times compared to the previous day. May not be reported if WHOOP does not have enough sleep data about a user yet to understand consistency..</param>
         /// <param name="sleepEfficiencyPercentage">A percentage (0-100%) of the time you spend in bed that you are actually asleep..</param>
-        public SleepScore(SleepStageSummary stageSummary = default(SleepStageSummary), SleepNeeded sleepNeeded = default(SleepNeeded), float respiratoryRate = default(float), float sleepPerformancePercentage = default(float), float sleepConsistencyPercentage = default(float), float sleepEfficiencyPercentage = default(float))
+        public SleepScore(SleepStageSummary stageSummary = default(SleepStageSummary), SleepNeeded sleepNeeded = default(SleepNeeded), float? respiratoryRate = default(float?), float? sleepPerformancePercentage = default(float?), float? sleepConsistencyPercentage = default(float?), float? sleepEfficiencyPercentage = default(float?))
         {
             // to ensure "stageSummary" is required (not null)
             if (stageSummary == null)
@@ -82,32 +82,32 @@ namespace Whoop.Sdk.Model
         /// </summary>
         /// <value>The user&#39;s respiratory rate during the sleep.</value>
         /// <example>16.11328125</example>
-        [DataMember(Name = "respiratory_rate", EmitDefaultValue = false)]
-        public float RespiratoryRate { get; set; }
+        [DataMember(Name = "respiratory_rate", EmitDefaultValue = true)]
+        public float? RespiratoryRate { get; set; }
 
         /// <summary>
         /// A percentage (0-100%) of the time a user is asleep over the amount of sleep the user needed. May not be reported if WHOOP does not have enough data about a user yet to calculate Sleep Need.
         /// </summary>
         /// <value>A percentage (0-100%) of the time a user is asleep over the amount of sleep the user needed. May not be reported if WHOOP does not have enough data about a user yet to calculate Sleep Need.</value>
         /// <example>98</example>
-        [DataMember(Name = "sleep_performance_percentage", EmitDefaultValue = false)]
-        public float SleepPerformancePercentage { get; set; }
+        [DataMember(Name = "sleep_performance_percentage", EmitDefaultValue = true)]
+        public float? SleepPerformancePercentage { get; set; }
 
         /// <summary>
         /// Percentage (0-100%) of how similar this sleep and wake times compared to the previous day. May not be reported if WHOOP does not have enough sleep data about a user yet to understand consistency.
         /// </summary>
         /// <value>Percentage (0-100%) of how similar this sleep and wake times compared to the previous day. May not be reported if WHOOP does not have enough sleep data about a user yet to understand consistency.</value>
         /// <example>90</example>
-        [DataMember(Name = "sleep_consistency_percentage", EmitDefaultValue = false)]
-        public float SleepConsistencyPercentage { get; set; }
+        [DataMember(Name = "sleep_consistency_percentage", EmitDefaultValue = true)]
+        public float? SleepConsistencyPercentage { get; set; }
 
         /// <summary>
         /// A percentage (0-100%) of the time you spend in bed that you are actually asleep.
         /// </summary>
         /// <value>A percentage (0-100%) of the time you spend in bed that you are actually asleep.</value>
         /// <example>91.69533848</example>
-        [DataMember(Name = "sleep_efficiency_percentage", EmitDefaultValue = false)]
-        public float SleepEfficiencyPercentage { get; set; }
+        [DataMember(Name = "sleep_efficiency_percentage", EmitDefaultValue = true)]
+        public float? SleepEfficiencyPercentage { get; set; }
 
         /// <summary>
         /// Returns the string presentation of the object

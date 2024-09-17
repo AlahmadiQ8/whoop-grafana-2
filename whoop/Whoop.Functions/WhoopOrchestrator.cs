@@ -10,7 +10,7 @@ using Whoop.Core.Services;
 
 namespace Whoop.Functions;
 
-public class WhoopOrchestrator(ProfileService profileService, CyclesService cyclesService, RecoveryService recoveryService)
+public class WhoopOrchestrator(ProfileService profileService, CyclesService cyclesService, RecoveryService recoveryService, SleepService sleepService, ILogger<WhoopOrchestrator> logger)
 {
     private const string UserId = "18435265";
 
@@ -28,16 +28,17 @@ public class WhoopOrchestrator(ProfileService profileService, CyclesService cycl
         // **********************************
         // Step 2: Upsert Cycles
         // **********************************
-        // TODO: Respect rate limiting for recoveries
-        var listOfCycleIds = await context.CallActivityAsync<IList<string>>(nameof(UpdateCyclesActivity), userId);
-        log.LogInformation("Ids upserted: {listOfCycleIds}", new {listOfCycleIds = string.Join(',', listOfCycleIds)});
+        await context.CallActivityAsync(nameof(UpdateCyclesActivity), userId);
         
         // **********************************
         // Step 3: Upsert Recorveries
         // **********************************
-        // TODO: Respect rate limiting for recoveries
-        var sleepIds = await context.CallActivityAsync<IList<string>>(nameof(UpdateRecoveryActivity), new RecoveryActivityInput { UserId = userId, CycleIds = listOfCycleIds });
-        log.LogInformation("sleepIds returned: {sleepIds}", new {sleepIds = string.Join(',', sleepIds)});
+        await context.CallActivityAsync(nameof(UpdateRecoveryActivity), userId);
+        
+        // **********************************
+        // Step 4: Upsert Sleeps
+        // **********************************
+        await context.CallActivityAsync(nameof(UpdateSleepActivity), userId);
         
         log.LogInformation("inside Orchestrator completed for userId '{userId}'", userId);
     }
@@ -49,15 +50,21 @@ public class WhoopOrchestrator(ProfileService profileService, CyclesService cycl
     }
     
     [FunctionName(nameof(UpdateCyclesActivity))]
-    public async Task<IList<string>> UpdateCyclesActivity([ActivityTrigger] string userId, ILogger log)
+    public async Task UpdateCyclesActivity([ActivityTrigger] string userId, ILogger log)
     {
-        return await cyclesService.UpdateCyclesAsync(userId);
+        await cyclesService.UpdateCyclesAsync(userId);
     }
     
     [FunctionName(nameof(UpdateRecoveryActivity))]
-    public async Task<IList<string>> UpdateRecoveryActivity([ActivityTrigger] RecoveryActivityInput input, ILogger log)
+    public async Task UpdateRecoveryActivity([ActivityTrigger] string userId, ILogger log)
     {
-        return await recoveryService.UpdateRecoveriesAsync(input.UserId, input.CycleIds);
+        await recoveryService.UpdateRecoveriesAsync(userId);
+    }
+    
+    [FunctionName(nameof(UpdateSleepActivity))]
+    public async Task UpdateSleepActivity([ActivityTrigger] string userId, ILogger log)
+    {
+        await sleepService.UpdateSleepAsync(userId);
     }
 
     [FunctionName(nameof(MyTestFunction))]
