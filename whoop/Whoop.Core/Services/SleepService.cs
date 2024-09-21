@@ -2,6 +2,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 using Whoop.Sdk.Api;
 using Whoop.Sdk.Client;
+using Whoop.Sdk.Model;
 
 namespace Whoop.Core.Services;
 
@@ -41,7 +42,7 @@ public class SleepService(
             totalCount += res.Records.Count;
             logger.LogInformation("Total fetched so far: {totalCount} records", totalCount);
             
-            await cosmosDbOperations.BulkUpdateCyclesWithSleepDataAsync(res.Records);
+            await cosmosDbOperations.BulkUpdateCyclesWithSleepDataAsync(res.Records.Where(r => r.ScoreState == Sleep.ScoreStateEnum.SCORED).ToList());
             logger.LogInformation("Upserted so far: {totalCount} records", totalCount);
             // ReSharper disable once ConditionIsAlwaysTrueOrFalseAccordingToNullableAPIContract
         } while(nextToken != null);

@@ -14,22 +14,25 @@ public class RecoveryService(
 {
     private readonly int _fetchLimit = configuration.GetValue<int>("RecordsFetchLimit");
     private readonly int _daysFromLastInserted = configuration.GetValue<int>("DaysFromLastInserted");
-    
+
     public async Task UpdateRecoveriesAsync(string userId)
     {
         var totalCount = 0;
         string? nextToken = null;
-        
-        var lastInsertedCycleNoRecoveryStartTimeMinus1 = (await cosmosDbOperations.GetLastInsertedCycleWithRecoveryDataAsync())?.Start.Subtract(TimeSpan.FromDays(_daysFromLastInserted));
-        
+
+        var lastInsertedCycleNoRecoveryStartTimeMinus1 =
+            (await cosmosDbOperations.GetLastInsertedCycleWithRecoveryDataAsync())?.Start.Subtract(
+                TimeSpan.FromDays(_daysFromLastInserted));
+
         if (lastInsertedCycleNoRecoveryStartTimeMinus1 != null)
-            logger.LogInformation("Last inserted cycle with recovery data was at {start}", lastInsertedCycleNoRecoveryStartTimeMinus1);
+            logger.LogInformation("Last inserted cycle with recovery data was at {start}",
+                lastInsertedCycleNoRecoveryStartTimeMinus1);
         else
             logger.LogInformation("No items found");
-        
+
         var profile = await cosmosDbOperations.GetProfileAsync(userId);
         ArgumentNullException.ThrowIfNull(profile);
-        
+
         var recoveryApi = new RecoveryApi(new Configuration { AccessToken = profile.AccessToken });
 
         do
@@ -38,16 +41,17 @@ public class RecoveryService(
                 limit: _fetchLimit,
                 start: lastInsertedCycleNoRecoveryStartTimeMinus1,
                 nextToken: nextToken);
-            
+
             nextToken = res.NextToken;
             totalCount += res.Records.Count;
             logger.LogInformation("Total fetched so far: {totalCount} records", totalCount);
-            
-            await cosmosDbOperations.BulkUpdateCyclesWithRecoveryDataAsync(res.Records);
+
+            await cosmosDbOperations.BulkUpdateCyclesWithRecoveryDataAsync(res.Records.Where(r =>
+                r.ScoreState == Recovery.ScoreStateEnum.SCORED).ToList());
             logger.LogInformation("Upserted so far: {totalCount} records", totalCount);
-            
+
             // ReSharper disable once ConditionIsAlwaysTrueOrFalseAccordingToNullableAPIContract
-        } while(nextToken != null);
+        } while (nextToken != null);
     }
 
     private async Task<List<Recovery>> FetchRecoveries(RecoveryApi recoveryApi, IList<string> cycleIds)

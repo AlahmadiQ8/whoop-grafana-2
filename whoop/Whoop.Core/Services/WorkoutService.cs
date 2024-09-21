@@ -2,6 +2,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 using Whoop.Sdk.Api;
 using Whoop.Sdk.Client;
+using Whoop.Sdk.Model;
 
 namespace Whoop.Core.Services;
 
@@ -40,7 +41,9 @@ public class WorkoutService(
             totalCount += res.Records.Count;
             logger.LogInformation("Total fetched so far: {totalCount} records", totalCount);
             
-            await cosmosDbOperations.BulkUpsertItemsAsync(res.Records.Select(r => r.ToWorkoutDto()));
+            await cosmosDbOperations.BulkUpsertItemsAsync(res.Records
+                .Where(w => w.ScoreState == Workout.ScoreStateEnum.SCORED)
+                .Select(r => r.ToWorkoutDto()));
             logger.LogInformation("Upserted so far: {totalCount} records", totalCount);
             
             // ReSharper disable once ConditionIsAlwaysTrueOrFalseAccordingToNullableAPIContract
