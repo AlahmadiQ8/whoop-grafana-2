@@ -10,7 +10,7 @@ using Whoop.Core.Services;
 
 namespace Whoop.Functions;
 
-public class WhoopOrchestrator(ProfileService profileService, CyclesService cyclesService, RecoveryService recoveryService, SleepService sleepService, ILogger<WhoopOrchestrator> logger)
+public class WhoopOrchestrator(ProfileService profileService, CyclesService cyclesService, RecoveryService recoveryService, SleepService sleepService, WorkoutService workoutService, ILogger<WhoopOrchestrator> logger)
 {
     private const string UserId = "18435265";
 
@@ -25,22 +25,46 @@ public class WhoopOrchestrator(ProfileService profileService, CyclesService cycl
         var userId = context.GetInput<OrchestratorInput>().UserId;
         await context.CallActivityAsync(nameof(RefreshTokenActivity), userId);
 
+        var tasks = new List<Task>
+        {
+            // **********************************
+            // Step a: Upsert denormalized cycles
+            // **********************************
+            UpsertDenormalizedCyclesActivity(context, userId),
+            
+            // **********************************
+            // Step b: Upsert workouts
+            // **********************************
+            context.CallActivityAsync(nameof(UpdateWorkoutActivity), UserId)
+        };
+        
+        await Task.WhenAll(tasks);
+        
+        log.LogInformation("inside Orchestrator completed for userId '{userId}'", userId);
+    }
+    
+    private async Task UpsertDenormalizedCyclesActivity(IDurableOrchestrationContext context, string userId)
+    {
         // **********************************
-        // Step 2: Upsert Cycles
+        // Step a.1: Upsert Cycles
         // **********************************
         await context.CallActivityAsync(nameof(UpdateCyclesActivity), userId);
         
         // **********************************
-        // Step 3: Upsert Recorveries
+        // Step a.2: Upsert Recoveries
         // **********************************
         await context.CallActivityAsync(nameof(UpdateRecoveryActivity), userId);
         
         // **********************************
-        // Step 4: Upsert Sleeps
+        // Step a.3: Upsert Sleeps
         // **********************************
         await context.CallActivityAsync(nameof(UpdateSleepActivity), userId);
-        
-        log.LogInformation("inside Orchestrator completed for userId '{userId}'", userId);
+    }
+    
+    [FunctionName(nameof(UpdateWorkoutActivity))]
+    public async Task UpdateWorkoutActivity([ActivityTrigger] string userId, ILogger log)
+    {
+        await workoutService.UpdateWorkoutsAsync(userId);
     }
 
     [FunctionName(nameof(RefreshTokenActivity))]

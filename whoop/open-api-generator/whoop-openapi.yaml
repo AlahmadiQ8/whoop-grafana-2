@@ -999,31 +999,37 @@ components:
       properties:
         zone_zero_milli:
           type: integer
+          nullable: true
           description: Time spent with Heart Rate lower than Zone One [0-50%)
           format: int32
           example: 13458
         zone_one_milli:
           type: integer
+          nullable: true
           description: Time spent in Heart Rate Zone One [50-60%)
           format: int32
           example: 389370
         zone_two_milli:
           type: integer
+          nullable: true
           description: Time spent in Heart Rate Zone Two [60-70%)
           format: int32
           example: 388367
         zone_three_milli:
           type: integer
+          nullable: true
           description: Time spent in Heart Rate Zone Three [70-80%)
           format: int32
           example: 71137
         zone_four_milli:
           type: integer
+          nullable: true
           description: Time spent in Heart Rate Zone Four [80-90%)
           format: int32
           example: 0
         zone_five_milli:
           type: integer
+          nullable: true
           description: Time spent in Heart Rate Zone Five [90-100%)
           format: int32
           example: 0

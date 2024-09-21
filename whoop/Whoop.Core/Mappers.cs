@@ -4,7 +4,7 @@ namespace Whoop.Core;
 
 public static class Mappers
 {
-    public static CycleDto ToCycleDto(this Cycle cycle, ProfileDto userProfile)
+    public static CycleDto ToCycleDto(this Cycle cycle)
     {
         return new CycleDto(
             Id: cycle.Id.ToString(),
@@ -42,6 +42,38 @@ public static class Mappers
             SleepPerformancePercentage: sleep.Score.SleepPerformancePercentage,
             SleepConsistencyPercentage: sleep.Score.SleepConsistencyPercentage,
             SleepEfficiencyPercentage: sleep.Score.SleepEfficiencyPercentage
+        );
+    }
+
+    public static WorkoutDto ToWorkoutDto(this Workout workout)
+    {
+        return new WorkoutDto(
+            Id: workout.Id.ToString(),
+            UserId: workout.UserId.ToString(),
+            CreatedAt: workout.CreatedAt,
+            UpdatedAt: workout.UpdatedAt,
+            Start: workout.Start,
+            End: workout.End,
+            TimeZoneOffset: workout.TimezoneOffset,
+            Sport: workout.SportId.ToSport(),
+            Score: workout.Score.ToWorkoutScoreDto()
+        );
+    }
+
+    private static WorkoutScoreDto ToWorkoutScoreDto(this WorkoutScore workoutScore)
+    {
+        return new WorkoutScoreDto(
+            Strain: workoutScore.Strain,
+            AverageHeartRate: workoutScore.AverageHeartRate,
+            MaxHeartRate: workoutScore.MaxHeartRate,
+            Kilojoule: workoutScore.Kilojoule,
+            PercentRecorded: workoutScore.PercentRecorded,
+            ZoneZeroMilli: workoutScore.ZoneDuration.ZoneZeroMilli,
+            ZoneOneMilli: workoutScore.ZoneDuration.ZoneOneMilli,
+            ZoneTwoMilli: workoutScore.ZoneDuration.ZoneTwoMilli,
+            ZoneThreeMilli: workoutScore.ZoneDuration.ZoneThreeMilli,
+            ZoneFourMilli: workoutScore.ZoneDuration.ZoneFourMilli,
+            ZoneFiveMilli: workoutScore.ZoneDuration.ZoneFiveMilli
         );
     }
 

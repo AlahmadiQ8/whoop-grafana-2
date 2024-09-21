@@ -5,47 +5,45 @@ using Whoop.Sdk.Client;
 
 namespace Whoop.Core.Services;
 
-public class CyclesService(
-    ILogger<CyclesService> logger,
+public class WorkoutService(    
     CosmosDbOperations cosmosDbOperations,
+    ILogger<RecoveryService> logger,
     IConfiguration configuration)
 {
     private readonly int _fetchLimit = configuration.GetValue<int>("RecordsFetchLimit");
     private readonly int _daysFromLastInserted = configuration.GetValue<int>("DaysFromLastInserted");
 
-    public async Task UpdateCyclesAsync(string userId)
+    public async Task UpdateWorkoutsAsync(string userId)
     {
         var totalCount = 0;
         string? nextToken = null;
-
-        var lastInsertedCycleStartTimeMinus1 =
-            (await cosmosDbOperations.GetLastInsertedCycleAsync())?.Start.Subtract(
-                TimeSpan.FromDays(_daysFromLastInserted));
-
-        if (lastInsertedCycleStartTimeMinus1 != null)
-            logger.LogInformation("Last inserted cycle was at {start}", lastInsertedCycleStartTimeMinus1);
+        
+        var lastInsertedWorkoutStartTime = (await cosmosDbOperations.GetLastInsertedWorkoutAsync())?.Start.Subtract(TimeSpan.FromDays(_daysFromLastInserted));
+        
+        if (lastInsertedWorkoutStartTime != null)
+            logger.LogInformation("Last inserted workout was at {start}", lastInsertedWorkoutStartTime);
         else
             logger.LogInformation("No items found");
-
+        
         var profile = await cosmosDbOperations.GetProfileAsync(userId);
         ArgumentNullException.ThrowIfNull(profile);
-
-        var cycleApi = new CycleApi(new Configuration { AccessToken = profile.AccessToken });
-
+        
+        var workoutApi = new WorkoutApi(new Configuration { AccessToken = profile.AccessToken });
+        
         do
         {
-            var res = await cycleApi.GetCycleCollectionAsync(
+            var res = await workoutApi.GetWorkoutCollectionAsync(
                 limit: _fetchLimit,
-                start: lastInsertedCycleStartTimeMinus1,
+                start: lastInsertedWorkoutStartTime,
                 nextToken: nextToken);
             nextToken = res.NextToken;
             totalCount += res.Records.Count;
             logger.LogInformation("Total fetched so far: {totalCount} records", totalCount);
-
-            await cosmosDbOperations.BulkUpsertItemsAsync(res.Records.Select(r => r.ToCycleDto()));
+            
+            await cosmosDbOperations.BulkUpsertItemsAsync(res.Records.Select(r => r.ToWorkoutDto()));
             logger.LogInformation("Upserted so far: {totalCount} records", totalCount);
-
+            
             // ReSharper disable once ConditionIsAlwaysTrueOrFalseAccordingToNullableAPIContract
-        } while (nextToken != null);
+        } while(nextToken != null);
     }
 }

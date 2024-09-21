@@ -40,7 +40,7 @@ namespace Whoop.Sdk.Model
         /// <param name="zoneThreeMilli">Time spent in Heart Rate Zone Three [70-80%).</param>
         /// <param name="zoneFourMilli">Time spent in Heart Rate Zone Four [80-90%).</param>
         /// <param name="zoneFiveMilli">Time spent in Heart Rate Zone Five [90-100%).</param>
-        public ZoneDuration(int zoneZeroMilli = default(int), int zoneOneMilli = default(int), int zoneTwoMilli = default(int), int zoneThreeMilli = default(int), int zoneFourMilli = default(int), int zoneFiveMilli = default(int))
+        public ZoneDuration(int? zoneZeroMilli = default(int?), int? zoneOneMilli = default(int?), int? zoneTwoMilli = default(int?), int? zoneThreeMilli = default(int?), int? zoneFourMilli = default(int?), int? zoneFiveMilli = default(int?))
         {
             this.ZoneZeroMilli = zoneZeroMilli;
             this.ZoneOneMilli = zoneOneMilli;
@@ -55,48 +55,48 @@ namespace Whoop.Sdk.Model
         /// </summary>
         /// <value>Time spent with Heart Rate lower than Zone One [0-50%)</value>
         /// <example>13458</example>
-        [DataMember(Name = "zone_zero_milli", EmitDefaultValue = false)]
-        public int ZoneZeroMilli { get; set; }
+        [DataMember(Name = "zone_zero_milli", EmitDefaultValue = true)]
+        public int? ZoneZeroMilli { get; set; }
 
         /// <summary>
         /// Time spent in Heart Rate Zone One [50-60%)
         /// </summary>
         /// <value>Time spent in Heart Rate Zone One [50-60%)</value>
         /// <example>389370</example>
-        [DataMember(Name = "zone_one_milli", EmitDefaultValue = false)]
-        public int ZoneOneMilli { get; set; }
+        [DataMember(Name = "zone_one_milli", EmitDefaultValue = true)]
+        public int? ZoneOneMilli { get; set; }
 
         /// <summary>
         /// Time spent in Heart Rate Zone Two [60-70%)
         /// </summary>
         /// <value>Time spent in Heart Rate Zone Two [60-70%)</value>
         /// <example>388367</example>
-        [DataMember(Name = "zone_two_milli", EmitDefaultValue = false)]
-        public int ZoneTwoMilli { get; set; }
+        [DataMember(Name = "zone_two_milli", EmitDefaultValue = true)]
+        public int? ZoneTwoMilli { get; set; }
 
         /// <summary>
         /// Time spent in Heart Rate Zone Three [70-80%)
         /// </summary>
         /// <value>Time spent in Heart Rate Zone Three [70-80%)</value>
         /// <example>71137</example>
-        [DataMember(Name = "zone_three_milli", EmitDefaultValue = false)]
-        public int ZoneThreeMilli { get; set; }
+        [DataMember(Name = "zone_three_milli", EmitDefaultValue = true)]
+        public int? ZoneThreeMilli { get; set; }
 
         /// <summary>
         /// Time spent in Heart Rate Zone Four [80-90%)
         /// </summary>
         /// <value>Time spent in Heart Rate Zone Four [80-90%)</value>
         /// <example>0</example>
-        [DataMember(Name = "zone_four_milli", EmitDefaultValue = false)]
-        public int ZoneFourMilli { get; set; }
+        [DataMember(Name = "zone_four_milli", EmitDefaultValue = true)]
+        public int? ZoneFourMilli { get; set; }
 
         /// <summary>
         /// Time spent in Heart Rate Zone Five [90-100%)
         /// </summary>
         /// <value>Time spent in Heart Rate Zone Five [90-100%)</value>
         /// <example>0</example>
-        [DataMember(Name = "zone_five_milli", EmitDefaultValue = false)]
-        public int ZoneFiveMilli { get; set; }
+        [DataMember(Name = "zone_five_milli", EmitDefaultValue = true)]
+        public int? ZoneFiveMilli { get; set; }
 
         /// <summary>
         /// Returns the string presentation of the object

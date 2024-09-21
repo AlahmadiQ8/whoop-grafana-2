@@ -46,6 +46,18 @@ public class CosmosDbOperations(
             ? null
             : (await linqFeed.ReadNextAsync()).FirstOrDefault();
     }
+    
+    public async Task<WorkoutDto?> GetLastInsertedWorkoutAsync()
+    {
+        var linqFeed = container.GetItemLinqQueryable<WorkoutDto>()
+            .Where(c => c.Type == Type.Workout)
+            .OrderByDescending(c => c.Start)
+            .ToFeedIterator();
+
+        return !linqFeed.HasMoreResults
+            ? null
+            : (await linqFeed.ReadNextAsync()).FirstOrDefault();
+    }
 
     public async Task<ProfileDto?> GetProfileAsync(string userId)
     {
@@ -65,10 +77,10 @@ public class CosmosDbOperations(
         await container.UpsertItemAsync(profile, new PartitionKey(profile.Id));
     }
 
-    public async Task BulkUpsertCyclesAsync(IEnumerable<CycleDto> items)
+    public async Task BulkUpsertItemsAsync<T>(IEnumerable<T> items) where T : WithId
     {
         var tasks = items
-            .Select(cycleDto => container.UpsertItemAsync(cycleDto, new PartitionKey(cycleDto.Id)))
+            .Select(item => container.UpsertItemAsync(item, new PartitionKey(item.Id)))
             .Cast<Task>()
             .ToList();
 

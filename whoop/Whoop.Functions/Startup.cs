@@ -6,8 +6,6 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Whoop.Core;
-using Whoop.Core.ServiceRegistrations;
-using Whoop.Core.Services;
 
 [assembly: FunctionsStartup(typeof(Whoop.Functions.Startup))]
 
@@ -19,12 +17,7 @@ public class Startup : FunctionsStartup
     {
         builder.Services
             .RegisterCosmosDb()
-            .AddSingleton<CosmosDbOperations>()
-            .AddSingleton<ProfileService>()
-            .AddSingleton<CyclesService>()
-            .AddSingleton<WhoopServices>()
-            .AddSingleton<RecoveryService>()
-            .AddSingleton<SleepService>()
+            .RegisterCoreServices()
             .AddOptions<WhoopSettings>()
             .Configure<IConfiguration>((settings, configuration) =>
             {

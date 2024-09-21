@@ -1,5 +1,4 @@
-﻿using Microsoft.Extensions.Logging;
-using Whoop.Core.Services;
+﻿using Whoop.Core.Services;
 
 namespace Whoop.Console;
 
@@ -7,7 +6,8 @@ public class ConsoleApp(
     ProfileService profileService,
     CyclesService cyclesService,
     RecoveryService recoveryService,
-    SleepService sleepService)
+    SleepService sleepService,
+    WorkoutService workoutService)
 {
     private const string UserId = "18435265";
 
@@ -17,6 +17,6 @@ public class ConsoleApp(
         await cyclesService.UpdateCyclesAsync(UserId);
         await recoveryService.UpdateRecoveriesAsync(UserId);
         await sleepService.UpdateSleepAsync(UserId);
-        
+        await workoutService.UpdateWorkoutsAsync(UserId);
     }
 }

@@ -2,10 +2,11 @@ using Azure.Identity;
 using Microsoft.Azure.Cosmos;
 using Microsoft.Azure.Cosmos.Fluent;
 using Microsoft.Extensions.DependencyInjection;
+using Whoop.Core.Services;
 
-namespace Whoop.Core.ServiceRegistrations;
+namespace Whoop.Core;
 
-public static class CosmosDbRegistration
+public static class ServiceRegistration
 {
     public static IServiceCollection RegisterCosmosDb(this IServiceCollection services)
     {
@@ -19,5 +20,17 @@ public static class CosmosDbRegistration
         services.AddSingleton(client);
 
         return services;
+    }
+
+    public static IServiceCollection RegisterCoreServices(this IServiceCollection services)
+    {
+        return services
+            .AddSingleton<CosmosDbOperations>()
+            .AddSingleton<ProfileService>()
+            .AddSingleton<CyclesService>()
+            .AddSingleton<WhoopServices>()
+            .AddSingleton<RecoveryService>()
+            .AddSingleton<SleepService>()
+            .AddSingleton<WorkoutService>();
     }
 }

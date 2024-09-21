@@ -27,4 +27,7 @@ az cosmosdb sql role definition create -a "whoop" -g "whoop-grafana-v2" -b @role
 
 az cosmosdb sql role definition list --account-name "whoop" -g "whoop-grafana-v2"
 az cosmosdb sql role assignment create -a "whoop" -g "whoop-grafana-v2" -s "/" -p "68b5c738-954a-479d-b660-244740a04886" -d "4fecc03e-8f97-4b2b-b239-6008aa6c82f1"
+
+
+az cosmosdb sql role assignment create -a "whoop" -g "whoop-grafana-v2" -s "/" -p "f739f28b-b823-4b3f-b60b-49b56b1eea9e" -d "4fecc03e-8f97-4b2b-b239-6008aa6c82f1"
 ```
