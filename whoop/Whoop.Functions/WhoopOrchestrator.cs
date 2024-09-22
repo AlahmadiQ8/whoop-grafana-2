@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
@@ -6,6 +7,7 @@ using Microsoft.Azure.WebJobs;
 using Microsoft.Azure.WebJobs.Extensions.DurableTask;
 using Microsoft.Azure.WebJobs.Extensions.Http;
 using Microsoft.Extensions.Logging;
+using Whoop.Core;
 using Whoop.Core.Services;
 
 namespace Whoop.Functions;
@@ -22,25 +24,25 @@ public class WhoopOrchestrator(ProfileService profileService, CyclesService cycl
         // **********************************
         // Step 1: Refresh OAuth Token
         // **********************************
-        var userId = context.GetInput<OrchestratorInput>().UserId;
-        await context.CallActivityAsync(nameof(RefreshTokenActivity), userId);
+        var input = context.GetInput<OrchestratorInput>();
+        await context.CallActivityAsync(nameof(RefreshTokenActivity), input.UserId);
 
         var tasks = new List<Task>
         {
             // **********************************
             // Step a: Upsert denormalized cycles
             // **********************************
-            UpsertDenormalizedCyclesActivity(context, userId),
+            UpsertDenormalizedCyclesActivity(context, input.UserId),
             
             // **********************************
             // Step b: Upsert workouts
             // **********************************
-            context.CallActivityAsync(nameof(UpdateWorkoutActivity), UserId)
+            context.CallActivityAsync(nameof(UpdateWorkoutActivity), input)
         };
         
         await Task.WhenAll(tasks);
         
-        log.LogInformation("inside Orchestrator completed for userId '{userId}'", userId);
+        log.LogInformation("inside Orchestrator completed for userId '{userId}'", input.UserId);
     }
     
     private async Task UpsertDenormalizedCyclesActivity(IDurableOrchestrationContext context, string userId)
@@ -62,9 +64,9 @@ public class WhoopOrchestrator(ProfileService profileService, CyclesService cycl
     }
     
     [FunctionName(nameof(UpdateWorkoutActivity))]
-    public async Task UpdateWorkoutActivity([ActivityTrigger] string userId, ILogger log)
+    public async Task UpdateWorkoutActivity([ActivityTrigger] OrchestratorInput input, ILogger log)
     {
-        await workoutService.UpdateWorkoutsAsync(userId);
+        await workoutService.UpdateWorkoutsAsync(input);
     }
 
     [FunctionName(nameof(RefreshTokenActivity))]
@@ -97,15 +99,24 @@ public class WhoopOrchestrator(ProfileService profileService, CyclesService cycl
         [DurableClient] IDurableOrchestrationClient starter,
         ILogger log)
     {
-        var instanceId = await starter.StartNewAsync(nameof(WhoopOrchestratorFunction), new OrchestratorInput { UserId = UserId });
+        var input = new OrchestratorInput { UserId = UserId };
+        var start = req.Query["Start"];
+        var end = req.Query["End"];
+
+        if (!string.IsNullOrEmpty(start))
+        {
+            input.Start = DateTime.Parse(start);
+        }
+
+        if (!string.IsNullOrEmpty(end))
+        {
+            input.End = DateTime.Parse(end);
+        }
+        
+        var instanceId = await starter.StartNewAsync(nameof(WhoopOrchestratorFunction), input);
         log.LogInformation("Started orchestration with ID = '{instanceId}'.", instanceId);
         return starter.CreateCheckStatusResponse(req, instanceId);
     }
-}
-
-public class OrchestratorInput
-{
-    public string UserId { get; init; }
 }
 
 public class RecoveryActivityInput

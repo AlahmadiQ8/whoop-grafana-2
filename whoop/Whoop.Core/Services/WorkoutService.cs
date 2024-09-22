@@ -14,19 +14,24 @@ public class WorkoutService(
     private readonly int _fetchLimit = configuration.GetValue<int>("RecordsFetchLimit");
     private readonly int _daysFromLastInserted = configuration.GetValue<int>("DaysFromLastInserted");
 
-    public async Task UpdateWorkoutsAsync(string userId)
+    public async Task UpdateWorkoutsAsync(OrchestratorInput input)
     {
         var totalCount = 0;
         string? nextToken = null;
         
-        var lastInsertedWorkoutStartTime = (await cosmosDbOperations.GetLastInsertedWorkoutAsync())?.Start.Subtract(TimeSpan.FromDays(_daysFromLastInserted));
+        var start = (await cosmosDbOperations.GetLastInsertedWorkoutAsync())?.Start.Subtract(TimeSpan.FromDays(_daysFromLastInserted));
+        if (input.Start != null)
+        {
+            start = input.Start;
+        }
+        var end = input.End;
         
-        if (lastInsertedWorkoutStartTime != null)
-            logger.LogInformation("Last inserted workout was at {start}", lastInsertedWorkoutStartTime);
+        if (start != null)
+            logger.LogInformation("start: {start}, end: {end}", start, end);
         else
             logger.LogInformation("No items found");
         
-        var profile = await cosmosDbOperations.GetProfileAsync(userId);
+        var profile = await cosmosDbOperations.GetProfileAsync(input.UserId);
         ArgumentNullException.ThrowIfNull(profile);
         
         var workoutApi = new WorkoutApi(new Configuration { AccessToken = profile.AccessToken });
@@ -35,7 +40,8 @@ public class WorkoutService(
         {
             var res = await workoutApi.GetWorkoutCollectionAsync(
                 limit: _fetchLimit,
-                start: lastInsertedWorkoutStartTime,
+                start: start,
+                end: end,
                 nextToken: nextToken);
             nextToken = res.NextToken;
             totalCount += res.Records.Count;

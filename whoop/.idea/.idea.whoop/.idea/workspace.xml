@@ -10,21 +10,12 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="e52df4b9-a088-4a57-ad69-a8d9c3bd7c15" name="Changes" comment="yaay recovery works">
-      <change afterPath="$PROJECT_DIR$/Whoop.Core/Services/WorkoutService.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Whoop.Core/WithId.cs" afterDir="false" />
+    <list default="true" id="e52df4b9-a088-4a57-ad69-a8d9c3bd7c15" name="Changes" comment="only ingest SCORED items">
+      <change afterPath="$PROJECT_DIR$/Whoop.Core/OrchestratorInput.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.whoop/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.whoop/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Whoop.Console/ConsoleApp.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Whoop.Console/ConsoleApp.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Whoop.Console/Program.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Whoop.Console/Program.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Whoop.Core/Mappers.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Whoop.Core/Mappers.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Whoop.Core/Models.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Whoop.Core/Models.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Whoop.Core/ServiceRegistrations/CosmosDbRegistration.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Whoop.Core/ServiceRegistration.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Whoop.Core/Services/CosmosDbOperations.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Whoop.Core/Services/CosmosDbOperations.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Whoop.Core/Services/CyclesService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Whoop.Core/Services/CyclesService.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Whoop.Functions/Startup.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Whoop.Functions/Startup.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Whoop.Core/Services/WorkoutService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Whoop.Core/Services/WorkoutService.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Whoop.Functions/WhoopOrchestrator.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Whoop.Functions/WhoopOrchestrator.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Whoop.Sdk/Model/ZoneDuration.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Whoop.Sdk/Model/ZoneDuration.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/open-api-generator/whoop-openapi.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/open-api-generator/whoop-openapi.yaml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/scratch.md" beforeDir="false" afterPath="$PROJECT_DIR$/scratch.md" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -56,15 +47,33 @@
   }
 }</component>
   <component name="HighlightingSettingsPerFile">
-    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/d7b784ffef6b43ccaed9eb04c8cb80f02aa420/dc/0e7003c5/Container.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/5890bea1acfbf3fed68846cf88de417726aefd9611192c0103fe2da89fa41/ConfigurationBinder.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock://C:/Users/Asus/Dev/whoop-grafana/whoop/Whoop.Console/ConsoleApp.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock://C:/Users/Asus/Dev/whoop-grafana/whoop/Whoop.Console/ConsoleApp.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock://C:/Users/Asus/Dev/whoop-grafana/whoop/Whoop.Core/Mappers.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock://C:/Users/Asus/Dev/whoop-grafana/whoop/Whoop.Core/Models.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///Users/mohammadmohammad/Dev/whoop-grafana/whoop/Whoop.Core/Models.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///Users/mohammadmohammad/Dev/whoop-grafana/whoop/Whoop.Core/Models.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///Users/mohammadmohammad/Dev/whoop-grafana/whoop/Whoop.Core/Models.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///Users/mohammadmohammad/Dev/whoop-grafana/whoop/Whoop.Core/Models.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///Users/mohammadmohammad/Dev/whoop-grafana/whoop/Whoop.Core/Models.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Whoop.Core/Services/CyclesService.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="mock://C:/Users/Asus/Dev/whoop-grafana/whoop/Whoop.Sdk/Model/ZoneDuration.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///Users/mohammadmohammad/Dev/whoop-grafana/whoop/Whoop.Core/Services/CyclesService.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///Users/mohammadmohammad/Dev/whoop-grafana/whoop/Whoop.Core/Services/RecoveryService.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///Users/mohammadmohammad/Dev/whoop-grafana/whoop/Whoop.Core/Services/SleepService.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///Users/mohammadmohammad/Dev/whoop-grafana/whoop/Whoop.Core/Services/WorkoutService.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///Users/mohammadmohammad/Dev/whoop-grafana/whoop/Whoop.Core/Services/WorkoutService.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///Users/mohammadmohammad/Dev/whoop-grafana/whoop/Whoop.Core/Services/WorkoutService.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///Users/mohammadmohammad/Dev/whoop-grafana/whoop/Whoop.Functions/WhoopOrchestrator.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///Users/mohammadmohammad/Dev/whoop-grafana/whoop/Whoop.Functions/WhoopOrchestrator.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/open-api-generator/config.json" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/3a4c11fa55a44e828524f4b4a3c5ebba9bc20/1d/cc6f504b/IDurableOrchestrationContext.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/3a4c11fa55a44e828524f4b4a3c5ebba9bc20/fb/ec082f1e/FunctionFailedException.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/676138d85f2c4c938f2e6e5de7e9f52afca0/c6/e8548df7/OptionsServiceCollectionExtensions.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/d7b784ffef6b43ccaed9eb04c8cb80f02aa420/dc/0e7003c5/Container.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/dd7bbb1eb6cb4178a82cd5136b2606b812978/7c/34680aba/HttpRequest.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/df33c7fd7db04a829574707592655c01d82000/fd/3a55f5a1/ExceptionDispatchInfo.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/e2737df420f949d6825b9a92af35542f2ce00/49/39379218/RestClientOptions.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/e2737df420f949d6825b9a92af35542f2ce00/b9/ee619aa6/RestClientExtensions.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/5890bea1acfbf3fed68846cf88de417726aefd9611192c0103fe2da89fa41/ConfigurationBinder.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/bf9021a960b74107a7e141aa06bc9d8a0a53c929178c2fb95b1597be8af8dc/ExceptionDispatchInfo.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/c3f46ada3f2f919bf7d13f37bab630e17eee4d777cf72fbae911b232c7380/JsonSerializationException.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/e0e7f33a98190bd57fce2afa23cbd66d0de6f9b5dfb1ff64c7ca4f11b6b8f9/TaskFailedException.cs" root0="FORCE_HIGHLIGHTING" />
   </component>
   <component name="KubernetesApiPersistence">{}</component>
   <component name="KubernetesApiProvider">{
@@ -320,7 +329,8 @@
     <MESSAGE value="started with recovery" />
     <MESSAGE value="fixed recovery" />
     <MESSAGE value="yaay recovery works" />
-    <option name="LAST_COMMIT_MESSAGE" value="yaay recovery works" />
+    <MESSAGE value="only ingest SCORED items" />
+    <option name="LAST_COMMIT_MESSAGE" value="only ingest SCORED items" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
