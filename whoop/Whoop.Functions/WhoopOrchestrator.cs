@@ -93,11 +93,10 @@ public class WhoopOrchestrator(ProfileService profileService, CyclesService cycl
         await sleepService.UpdateSleepAsync(userId);
     }
 
-    [FunctionName(nameof(MyTestFunction))]
-    public async Task<IActionResult> MyTestFunction(
+    [FunctionName(nameof(HttpTriggerFunction))]
+    public async Task<IActionResult> HttpTriggerFunction(
         [HttpTrigger(AuthorizationLevel.Function, "get", "post", Route = null)] HttpRequest req,
         [DurableClient] IDurableOrchestrationClient starter,
-        [TimerTrigger("0 0 14 * * *")] TimerInfo timer,
         ILogger log)
     {
         var input = new OrchestratorInput { UserId = UserId };
@@ -117,6 +116,18 @@ public class WhoopOrchestrator(ProfileService profileService, CyclesService cycl
         var instanceId = await starter.StartNewAsync(nameof(WhoopOrchestratorFunction), input);
         log.LogInformation("Started orchestration with ID = '{instanceId}'.", instanceId);
         return starter.CreateCheckStatusResponse(req, instanceId);
+    }
+    
+    [FunctionName(nameof(TimerTriggerFunction))]
+    public async Task TimerTriggerFunction(
+        [TimerTrigger("0 0 14 * * *")] TimerInfo timer,
+        [DurableClient] IDurableOrchestrationClient starter,
+        ILogger log)
+    {
+        var input = new OrchestratorInput { UserId = UserId };
+        
+        var instanceId = await starter.StartNewAsync(nameof(WhoopOrchestratorFunction), input);
+        log.LogInformation("Started orchestration with ID = '{instanceId}'.", instanceId);
     }
 }
 
