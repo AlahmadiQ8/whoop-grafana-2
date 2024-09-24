@@ -11,12 +11,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="e52df4b9-a088-4a57-ad69-a8d9c3bd7c15" name="Changes" comment="only ingest SCORED items">
-      <change afterPath="$PROJECT_DIR$/Whoop.Core/OrchestratorInput.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../diagramd.drawio" beforeDir="false" afterPath="$PROJECT_DIR$/../diagramd.drawio" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.whoop/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.whoop/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Whoop.Console/ConsoleApp.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Whoop.Console/ConsoleApp.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Whoop.Core/Services/WorkoutService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Whoop.Core/Services/WorkoutService.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Whoop.Functions/WhoopOrchestrator.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Whoop.Functions/WhoopOrchestrator.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/scratch.md" beforeDir="false" afterPath="$PROJECT_DIR$/scratch.md" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -164,6 +161,7 @@
       <workItem from="1725820985970" duration="5720000" />
       <workItem from="1725905024181" duration="10215000" />
       <workItem from="1726908597403" duration="8365000" />
+      <workItem from="1727108183049" duration="149000" />
     </task>
     <task id="LOCAL-00001" summary="added user profile">
       <option name="closed" value="true" />

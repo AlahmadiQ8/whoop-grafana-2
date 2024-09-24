@@ -97,6 +97,7 @@ public class WhoopOrchestrator(ProfileService profileService, CyclesService cycl
     public async Task<IActionResult> MyTestFunction(
         [HttpTrigger(AuthorizationLevel.Function, "get", "post", Route = null)] HttpRequest req,
         [DurableClient] IDurableOrchestrationClient starter,
+        [TimerTrigger("0 0 14 * * *")] TimerInfo timer,
         ILogger log)
     {
         var input = new OrchestratorInput { UserId = UserId };
